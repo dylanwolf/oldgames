@@ -1,0 +1,1006 @@
+CLS
+LOCATE 0,0
+COLOR 15,0
+PRINT "HOVERCRAFT A-225X by DYLAN WOLF"
+PRINT "Press any key to begin game..."
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+CLS
+RANDOMIZE
+efg500 = 500
+SCORE = 0
+LIFE = 10
+ENX = 78
+EN = RND(0)
+EY = EN / 1638
+ENY = EY + 1
+Y = 10
+X = 35
+FOR ROW = 0 TO 22
+FOR COL = 0 TO 78
+COLOR 1,1
+LOCATE ROW,COL
+PRINT "€"
+NEXT COL
+NEXT ROW
+COLOR 14,6
+FOR COL = 0 TO 78
+LOCATE 23,COL
+PRINT "±"
+NEXT COL
+FOR T = 1 TO 2
+ENX = ENX - 1
+IF ENX = 0 THEN RENEW:
+LOCATE ENY, ENX
+COLOR 12,1
+PRINT ""
+Y2 = Y+1
+X2 = X-2
+LOCATE 0,0
+COLOR 0,7
+PRINT "                                                                                "
+LOCATE 0,5
+COLOR 1,7
+PRINT SCORE
+LOCATE 0,0
+PRINT "SCORE"
+LOCATE 0,30
+COLOR 4,7
+PRINT LIFE
+LOCATE 0, 33
+PRINT ""
+IF SCORE = 2750 THEN WINNER: 
+IF SCORE = 1500 THEN CLRS3:
+IF SCORE = 750 THEN CLRS2:
+IF SCORE = 250 THEN CLRS1: 
+BFCLER:
+IF LEVEL = 3 THEN WASHDC: 
+IF LEVEL = 2 THEN BUNKER:
+IF LEVEL = 1 THEN FSCENE:
+IF LEVEL = 0 THEN DSCENE: 
+BFSCN:
+LOCATE Y,X
+COLOR 14,1
+PRINT "‹";
+COLOR 14,4
+PRINT "›€›€€";
+COLOR 3,1
+PRINT "€‹";
+LOCATE Y2,X2
+COLOR 9,1
+PRINT "ﬁ€€€€€€€€€€‹"
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+LOCATE ENY, ENX
+PRINT " "
+I$ = INKEY$
+ZYX$ = CHR$(0)
+LFT$ = ZYX$ + "K"
+RGT$ = ZYX$ + "M"
+UPS$ = ZYX$ + "H"
+DWN$ = ZYX$ + "P"
+HME$ = ZYX$ + "G"
+PGD$ = ZYX$ + "Q"
+ENDD$ = ZYX$ + "O"
+PGU$ = ZYX$ + "I"
+IF I$ = "4" THEN LEFT:
+IF I$ = "6" THEN RIGHT:
+IF I$ = "8" THEN UP:
+IF I$ = "2" THEN DOWN:
+IF I$ = "7" THEN UL:
+IF I$ = "9" THEN UR:
+IF I$ = "1" THEN DL:
+IF I$ = "3" THEN DR:
+IF I$ = LFT$ THEN LEFT:
+IF I$ = RGT$ THEN RIGHT:
+IF I$ = UPS$ THEN UP:
+IF I$ = DWN$ THEN DOWN:
+IF I$ = HME$ THEN UL:
+IF I$ = PGU$ THEN UR:
+IF I$ = ENDD$ THEN DL:
+IF I$ = PGD$ THEN DR:
+IF I$ = "" THEN QUIT:
+IF I$ = " " THEN SHOOT:
+IF I$ = "5" THEN SHOOT:
+IF I$ = "Z" THEN PAUSE:
+IF I$ = "z" THEN PAUSE:
+IF I$ = "+" THEN FASTER:
+IF I$ = "-" THEN SLOWER:
+BFMOVE:
+T = 1
+NEXT T
+
+LEFT: 
+IF X = 2 THEN BFMOVE:
+LOCATE Y,X
+PRINT "        "
+LOCATE Y2,X2
+PRINT "            "
+X = X - 1
+GOSUB BFMOVE:
+RIGHT: 
+IF X = 70 THEN BFMOVE:
+LOCATE Y,X
+PRINT "        "
+LOCATE Y2,X2
+PRINT "            "
+X = X + 1
+GOSUB BFMOVE:
+UP: 
+IF Y = 2 THEN BFMOVE:
+LOCATE Y,X
+PRINT "        "
+LOCATE Y2,X2
+PRINT "            "
+Y =Y  - 1
+GOSUB BFMOVE:
+DOWN: 
+IF Y = 21 THEN BFMOVE:
+LOCATE Y,X
+PRINT "        "
+LOCATE Y2,X2
+PRINT "            "
+Y = Y + 1
+GOSUB BFMOVE:
+
+SHOOT:
+LOCATE Y,X
+COLOR 14,1
+PRINT "‹";
+COLOR 14,4
+PRINT "›€›€€";
+COLOR 3,1
+PRINT "€‹";
+LOCATE Y2,X2
+COLOR 9,1
+PRINT "ﬁ€€€€€€€€€€‹"
+LOCATE ENY, ENX
+COLOR 12,1
+PRINT ""
+Y3 = Y - 1
+X5 = X + 4
+X6 = X + 3
+LOCATE Y3,X6
+COLOR 14,1
+PRINT "≥"
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+LOCATE Y3,X6
+COLOR 14,1
+PRINT "’"
+FOR SX = X5 TO 78
+LOCATE Y3,SX
+COLOR 14,4
+PRINT "Õ"
+NEXT SX
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+FOR SX = X5 TO 78
+LOCATE Y3,SX
+COLOR 14,4
+PRINT "="
+NEXT SX
+IF ENY = Y3 THEN BOOM:
+BFBOOM:
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+FOR SX = X5 TO 78
+LOCATE Y3,SX
+COLOR 14,4
+PRINT "ƒ"
+NEXT SX
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+FOR SX = X5 TO 78
+LOCATE Y3,SX
+COLOR 14,4
+PRINT "-"
+NEXT SX
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+FOR SX = X5 TO 78
+LOCATE Y3,SX
+COLOR 5,1
+PRINT " "
+NEXT SX
+LOCATE Y3,X6
+COLOR 14,1
+PRINT "≥"
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+LOCATE Y3,X6
+PRINT " "
+LOCATE ENY,ENX
+PRINT " "
+GOSUB BFMOVE:
+UL: 
+IF X = 2 THEN BFMOVE:
+IF Y = 2 THEN BFMOVE:
+LOCATE Y,X
+PRINT "        "
+LOCATE Y2,X2
+PRINT "            "
+X = X - 1
+Y = Y - 1
+GOSUB BFMOVE:
+UR: 
+IF X = 70 THEN BFMOVE:
+IF Y = 2 THEN BFMOVE:
+LOCATE Y,X
+PRINT "        "
+LOCATE Y2,X2
+PRINT "            "
+X = X + 1
+Y = Y - 1
+GOSUB BFMOVE:
+DL: 
+IF X = 2 THEN BFMOVE:
+IF Y = 21 THEN BFMOVE:
+LOCATE Y,X
+PRINT "        "
+LOCATE Y2,X2
+PRINT "            "
+Y = Y + 1
+X = X - 1
+GOSUB BFMOVE:
+DR: 
+IF X = 70 THEN BFMOVE:
+IF Y = 21 THEN BFMOVE:
+LOCATE Y,X
+PRINT "        "
+LOCATE Y2,X2
+PRINT "            "
+Y = Y + 1
+X = X + 1
+GOSUB BFMOVE:
+
+BOOM:
+IF ENX < X5 THEN BFBOOM:
+RANDOMIZE
+SCORE = SCORE + 50
+LOCATE ENY, ENX
+COLOR 14,4
+PRINT ""
+FOR TM = 1 TO SPDSET
+LOCATE 23,0
+PRINT ""
+NEXT TM
+COLOR 0,1
+LOCATE ENY, ENX
+PRINT " "
+ENX = 78
+EN = RND(0)
+EY = EN / 1638
+ENY = EY + 1
+GOSUB BFBOOM:
+RENEW:
+RANDOMIZE
+ENX = 78
+EN = RND(0)
+EY = EN / 1638
+ENY = EY + 1
+LIFE = LIFE - 1
+SCORE = SCORE - 50
+IF LIFE = 0 THEN GAMEOVER:
+GOSUB BFMOVE:
+
+GAMEOVER:
+CLS
+COLOR 8,7
+FOR SR = 0 TO 17
+SR2 = 18 - SR
+STRT = 24 - SR2
+NUMB = SR2 * 2
+FOR SC = STRT TO NUMB
+LOCATE SR, SC
+PRINT "±"
+NEXT SC
+NEXT SR
+COLOR 4,0
+LOCATE 10,24
+PRINT " €€    €›   €›  ﬁ€ €ﬂﬂﬂ      €€€  €    € €ﬂﬂﬂ €€€‹  €"
+LOCATE 11,24
+PRINT "ﬁ›    ﬁ›ﬁ›  €ﬁ  ›€ €        ﬁ› ﬁ› ﬁ›  ﬁ› €    €   € €"
+LOCATE 12,24
+PRINT "€ ‹‹  €  €  € ›ﬁ € €ﬂﬂ      €   €  €  €  €ﬂﬂ  €€€ﬂ  €"
+LOCATE 13,24
+PRINT "ﬁ› € ﬁ€€€ﬁ› € ﬁ› € €        ﬁ› ﬁ›  ﬁ›ﬁ›  €    €ﬂ‹   €"
+LOCATE 14,24
+PRINT " €€  €    € €    € €‹‹‹      €€€    €€   €‹‹‹ €  €  ‹"
+COLOR 12,0
+LOCATE 18,22
+PRINT ""
+LOCATE 19,21
+PRINT ""
+LOCATE 18,26
+PRINT ""
+LOCATE 19,27
+PRINT ""
+LOCATE 20,20
+COLOR 14,4
+PRINT "€ﬁ€ﬁ€€";
+COLOR 0,3
+PRINT " ﬂ"  
+COLOR 1,0
+LOCATE 21,19
+PRINT "€€€€€€€€€€‹"
+FOR T = 1 TO 2
+COLOR 0,4
+LOCATE 18, 23
+PRINT "›ﬁ"
+COLOR 14,4
+LOCATE 19,23
+PRINT " ‹ "
+FOR TM = 1 TO efg500
+COLOR 0,0
+LOCATE 18,25
+PRINT "  "
+I$ = INKEY$
+IF I$ > "" THEN ENDIT:
+IF I$ < "" THEN ENDIT:
+NEXT TM
+COLOR 14,4
+LOCATE 18, 24
+PRINT " "
+LOCATE 19,23
+PRINT " ‹ "
+FOR TM = 1 TO efg500
+COLOR 0,0
+LOCATE 18,23
+PRINT " "
+LOCATE 18,25
+PRINT " "
+I$ = INKEY$
+IF I$ > "" THEN ENDIT:
+IF I$ < "" THEN ENDIT:
+NEXT TM
+color 0,4
+LOCATE 18, 24
+PRINT "›ﬁ"
+COLOR 14,4
+LOCATE 19,23
+PRINT " ‹ "
+FOR TM = 1 TO efg500
+COLOR 0,0
+LOCATE 18,23
+PRINT " "
+I$ = INKEY$
+IF I$ > "" THEN ENDIT:
+IF I$ < "" THEN ENDIT:
+NEXT TM
+COLOR 14,4
+LOCATE 18, 24
+PRINT " "
+LOCATE 19,23
+PRINT " ‹ "
+T = 1
+I$ = INKEY$
+IF I$ > "" THEN ENDIT:
+IF I$ < "" THEN ENDIT:
+FOR TM = 1 TO efg500
+COLOR 0,0
+LOCATE 18,23
+PRINT " "
+LOCATE 18,25
+PRINT " "
+I$ = INKEY$
+IF I$ > "" THEN ENDIT:
+IF I$ < "" THEN ENDIT:
+NEXT TM
+NEXT T
+
+ENDIT:
+END
+
+FSCENE:
+HOVB = 1
+COLOR 14,7
+LOCATE 0, 50
+PRINT "Forest Raid"
+COLOR 2,0
+FOR COL = 0 TO 78
+LOCATE 23,COL
+PRINT "±"
+NEXT COL
+COLOR 2, 1
+LOCATE 19,0
+PRINT "  €  €    €    €       €     €     €      €     €    €"
+LOCATE 20,0
+PRINT " €€€ €€  €€€  €€€ €  € €€   €€€   €€€ €  €€€   €€€  €€€"
+LOCATE 21,0
+PRINT "€€€€€€€€ €€€€ €€€€€€ € €€€ €€€€  €€€€€€  €€€€ €€€€€€€€€€"
+COLOR 6, 1
+LOCATE 22,0
+PRINT "  €   €   €    € €   €  €   €      €  €   €     €    €"
+GOSUB BFSCN:
+
+DSCENE:
+HOVB = 1
+COLOR 14,7
+LOCATE 0, 50
+PRINT "Desert Oasis"
+COLOR 14,6
+FOR COL = 0 TO 69
+LOCATE 23,COL
+PRINT "±"
+NEXT COL
+LOCATE 19,35
+COLOR 2,1
+PRINT "ﬁﬂ‹ﬂﬂ‹"
+LOCATE 20,35
+PRINT " ﬁ ﬂ›";
+COLOR 0,7
+LOCATE 20,37
+PRINT "ƒ"   
+LOCATE 21,37
+PRINT "ƒ"   
+LOCATE 22,37
+PRINT "ƒ"   
+LOCATE 19,55
+COLOR 2,1
+PRINT "‹ﬂ‹ﬂ‹"
+LOCATE 20,55
+PRINT "›ﬁ  ﬁ›";
+COLOR 6,1
+LOCATE 20,57
+PRINT "ﬁ›"   
+LOCATE 21,57
+PRINT " €"   
+LOCATE 22,57
+PRINT " €"   
+LOCATE 22,5
+COLOR 14,6
+PRINT "∞±±∞"
+LOCATE 21,7
+PRINT "±"
+LOCATE 23,70
+COLOR 9,1
+PRINT "€€€€€€€€€"
+GOSUB BFSCN:
+
+BUNKER:
+HOVB = 3
+COLOR 14,7
+LOCATE 0, 50
+PRINT "Airport Defender"
+LOCATE 18,10
+COLOR 7,1
+PRINT "‹€          "
+LOCATE 19,10
+PRINT " €€€€€€€€€€€€"
+LOCATE 20,10
+PRINT " ﬁ€€€€€€€€€€€"
+LOCATE 19,23
+COLOR 3,1
+PRINT "€"
+LOCATE 20,23
+PRINT "€›"
+COLOR 8,7
+LOCATE 20,15
+PRINT "ﬁ€€€›"
+COLOR 8,1
+LOCATE 21,14
+PRINT "ﬁ€€€›"
+LOCATE 21, 19
+COLOR 15,1
+PRINT "≥≥"
+LOCATE 22,19
+PRINT "OO"
+LOCATE 23,0
+COLOR 8,7
+PRINT "≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤"
+LOCATE 17,51
+COLOR 15,6
+PRINT "≥≥≥≥≥"
+LOCATE 18,50
+PRINT "≥≥≥≥≥≥≥"
+COLOR 0,7
+LOCATE 19,50 
+PRINT "       "
+LOCATE 20,50
+PRINT "       "
+LOCATE 21,50
+PRINT "       "
+LOCATE 22,50
+PRINT "       "
+COLOR 0,6
+LOCATE 20,51
+PRINT "  ≥  "
+LOCATE 21,51
+PRINT "  ≥  "
+LOCATE 22,51
+PRINT "  ≥  "
+LOCATE 17,61
+COLOR 15,6
+PRINT "≥≥≥≥≥"
+LOCATE 18,60
+PRINT "≥≥≥≥≥≥≥"
+COLOR 0,7
+LOCATE 19,60 
+PRINT "       "
+LOCATE 20,60
+PRINT "       "
+LOCATE 21,60
+PRINT "       "
+LOCATE 22,60
+PRINT "       "
+COLOR 0,6
+LOCATE 20,61
+PRINT "  ≥  "
+LOCATE 21,61
+PRINT "  ≥  "
+LOCATE 22,61
+PRINT "  ≥  "
+GOSUB BFSCN:
+
+WASHDC:
+HOVB = 1
+COLOR 14,7
+LOCATE 0, 50
+PRINT "D.C."
+COLOR 8,7
+FOR COL = 0 TO 78
+LOCATE 23,COL
+PRINT "±"
+NEXT COL
+COLOR 14,1
+LOCATE 19,55
+PRINT "o"
+LOCATE 20,55
+PRINT "√"
+LOCATE 21,55
+PRINT "√"
+LOCATE 20,56
+COLOR 15,3
+PRINT "::";
+COLOR 15,4
+PRINT "‹‹‹"
+LOCATE 21,56
+PRINT "‹‹‹‹‹"
+COLOR 7,1
+LOCATE 13,44
+PRINT "‹€‹"  
+LOCATE 14,42
+PRINT "‹€€€€€‹"
+LOCATE 15,42
+PRINT "€€€€€€€"
+LOCATE 16,42
+PRINT "€€€€€€€"
+LOCATE 17,42
+PRINT "€€€€€€€"
+LOCATE 18,42
+PRINT "€€€€€€€"
+LOCATE 19,42
+PRINT "€€€€€€€"
+LOCATE 20,42
+PRINT "€€€€€€€"
+LOCATE 21,42
+PRINT "€€€€€€€"
+COLOR 14,1       
+LOCATE 22,35
+PRINT "∆ÕÿÕÿÕÿ";
+COLOR 14,7
+PRINT "ÕÿÕÿÕÿÕ"; 
+COLOR 14,1
+PRINT "ÿÕÿÕÿÕµ";
+FOR AY = 13 TO 21
+LOCATE AY,45
+COLOR 0,7
+PRINT "≥"
+NEXT AY
+GOSUB BFSCN:
+
+CLRS1:
+IF LEVEL = 1 THEN BFCLER:
+LEVEL = 1
+LIFE = 8
+FOR ROW = 0 TO 23
+ROW2 = 23 - ROW
+COLOR 0,0
+LOCATE 24,0
+PRINT "                                                                               "
+LOCATE ROW2,39
+COLOR 7,0
+PRINT "¿ƒŸ"
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+LOCATE ROW2,39
+PRINT "   "
+NEXT ROW
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+FOR ROW = 0 TO 23
+ROW3 = ROW + 2
+LOCATE ROW,0
+COLOR 15,1
+PRINT "                                                                               "
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+IF ROW = 22 THEN BFCLER:
+IF ROW = 23 THEN BFCLER:
+LOCATE ROW3,39
+COLOR 7,0
+PRINT "¿ƒŸ"
+NEXT ROW
+
+
+CLRS2:
+IF LEVEL = 2 THEN BFCLER:
+LEVEL = 2
+LIFE = 5
+FOR ROW = 0 TO 23
+ROW2 = 23 - ROW
+COLOR 0,0
+LOCATE 24,0
+PRINT "                                                                               "
+LOCATE ROW2,39
+COLOR 7,0
+PRINT "¿ƒŸ"
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+LOCATE ROW2,39
+PRINT "   "
+NEXT ROW
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+FOR ROW = 0 TO 23
+ROW3 = ROW + 2
+LOCATE ROW,0
+COLOR 15,1
+PRINT "                                                                               "
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+IF ROW = 22 THEN BFCLER:
+IF ROW = 23 THEN BFCLER:
+LOCATE ROW3,39
+COLOR 7,0
+PRINT "¿ƒŸ"
+NEXT ROW
+
+CLRS3:
+IF LEVEL = 3 THEN BFCLER:
+LEVEL = 3
+LIFE = 2
+FOR ROW = 0 TO 23
+ROW2 = 23 - ROW
+COLOR 0,0
+LOCATE 24,0
+PRINT "                                                                               "
+LOCATE ROW2,39
+COLOR 7,0
+PRINT "¿ƒŸ"
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+LOCATE ROW2,39
+PRINT "   "
+NEXT ROW
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+FOR ROW = 0 TO 23
+ROW3 = ROW + 2
+LOCATE ROW,0
+COLOR 15,1
+PRINT "                                                                               "
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+IF ROW = 22 THEN BFCLER:
+IF ROW = 23 THEN BFCLER:
+LOCATE ROW3,39
+COLOR 7,0
+PRINT "¿ƒŸ"
+NEXT ROW
+
+WINNER:
+FOR ROW = 0 TO 23
+ROW2 = 23 - ROW
+COLOR 0,0
+LOCATE 24,0
+PRINT "                                                                               "
+LOCATE ROW2,39
+COLOR 7,0
+PRINT "¿ƒŸ"
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+LOCATE ROW2,39
+PRINT "   "
+NEXT ROW
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+FOR ROW = 0 TO 23
+ROW3 = ROW + 2
+LOCATE ROW,0
+COLOR 15,1
+PRINT "                                                                               "
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+IF ROW = 22 THEN DONEC:
+IF ROW = 23 THEN DONEC:
+LOCATE ROW3,39
+COLOR 7,0
+PRINT "¿ƒŸ"
+NEXT ROW
+DONEC:
+FOR T = 1 TO 2
+FOR ROW = 0 TO 20
+FOR COL = 2 TO 68
+COLOR 14,1
+LOCATE 10,16
+PRINT "€   € "
+LOCATE 11,16
+PRINT "ﬁ› ﬁ› " 
+LOCATE 12,16
+PRINT " € €  "
+LOCATE 13,16
+PRINT "‹ €   "
+LOCATE 14,16
+PRINT "ﬂ€›   "
+
+COLOR 4,1
+LOCATE 10,22
+PRINT " €€  "
+LOCATE 11,22
+PRINT "ﬁ›ﬁ› "
+LOCATE 12,22
+PRINT "€  € "
+LOCATE 13,22
+PRINT "ﬁ›ﬁ› "
+LOCATE 14,22
+PRINT " €€  "
+
+COLOR 9,1
+LOCATE 10,27
+PRINT "€  €      "
+LOCATE 11,27
+PRINT "€  €      "
+LOCATE 12,27
+PRINT "€  €      "
+LOCATE 13,27
+PRINT "ﬁ›ﬁ›      "
+LOCATE 14,27
+PRINT " €€ﬁ‹     "
+
+COLOR 2,1
+LOCATE 10,38
+PRINT "€     € "
+LOCATE 11,38
+PRINT "€  €  ﬁ›"
+LOCATE 12,38
+PRINT "€  €  € "
+LOCATE 13,38
+PRINT "ﬁ›ﬁ€›ﬁ› "
+LOCATE 14,38
+PRINT " €€ €€  "
+
+COLOR 14,1
+LOCATE 10,45
+PRINT " €€€€ "
+LOCATE 11,45
+PRINT "  €   "
+LOCATE 12,45
+PRINT "  €   "
+LOCATE 13,45
+PRINT "  €   "
+LOCATE 14,45
+PRINT "€€€€  "
+
+COLOR 4,1
+LOCATE 10,50
+PRINT "   €›  € "
+LOCATE 11,50
+PRINT "  ﬁ›› ﬁ› "
+LOCATE 12,50
+PRINT "  € › €  "
+LOCATE 13,50
+PRINT " ﬁ› ›ﬁ›  "
+LOCATE 14,50
+PRINT " €  €€   "
+
+COLOR 15,1
+LOCATE 10,59
+PRINT "   €"
+LOCATE 11,59
+PRINT "  ﬁ›"
+LOCATE 12,59
+PRINT "  € "
+LOCATE 13,59
+PRINT " ﬁ› "
+LOCATE 14,59
+PRINT " ‹  "
+R2 = ROW + 1
+C2 = COL - 2
+LOCATE ROW,COL
+COLOR 14,1
+PRINT "‹";
+COLOR 14,4
+PRINT "›€›€€";
+COLOR 3,1
+PRINT "€‹"
+LOCATE R2,C2
+COLOR 9,1
+PRINT "ﬁ€€€€€€€€€€‹"
+START& = TIMER
+WHILE (TME& <> 1)
+GAMTIM& = TIMER
+WAIT& = GAMTIM& - START&
+TME& = ABS(WAIT&)
+WEND
+TME& = 0
+LOCATE ROW,COL
+PRINT "        "
+LOCATE R2,C2
+PRINT "             "
+I$ = INKEY$
+IF I$ > "" THEN QUIT:
+IF I$ < "" THEN QUIT:
+NEXT COL
+NEXT ROW
+T = 1
+NEXT T
+END
+
+PAUSE:
+COLOR 14,3
+LOCATE 6,22
+PRINT "                                     "
+LOCATE 11,22
+PRINT "                                     "
+LOCATE 7,22
+PRINT "  €ﬂﬂ‹   ﬁ€›  €  €  ‹ﬂﬂ‹ €ﬂ    €     "
+COLOR 4,3                                   
+LOCATE 8,22
+PRINT "  €  ‹ﬂ  € €  €  €  ﬂ‹‹  €‹   ﬁ›     " 
+COLOR 1,3
+LOCATE 9,22
+PRINT "  €ﬂﬂ   ﬁ€€ﬁ› €  €     € €    €      "
+COLOR 2,3
+LOCATE 10,22
+PRINT " ﬁ€     €   € ﬂ€€€‹ ﬂ‹‹ﬂ €‹  ‹   ";
+COLOR 15,11
+PRINT "‹‹‹ " 
+LOCATE 23,7
+FOR T = 1 TO 2
+T = 1
+COLOR 7,1
+LOCATE 0,74
+COLOR 8,7
+PRINT SPDSET
+I$ = INKEY$
+IF I$ = "+" THEN FASTER2:
+IF I$ = "-" THEN SLOWER2:
+IF I$ > "" THEN BFMOVE2:
+IF I$ < "" THEN BFMOVE2:
+BFPAUS:
+NEXT T
+
+BFMOVE2:
+FOR ROW = 6 TO 11
+FOR COL = 22 TO 58
+LOCATE ROW,COL
+COLOR 0,1
+PRINT " "
+NEXT COL
+NEXT ROW
+GOSUB BFMOVE:
+
+FASTER:
+IF SPDSET = 0 THEN BFMOVE:
+SPDSET = SPDSET - 5 
+GOSUB BFMOVE:
+
+SLOWER:
+IF SPDSET = 5000 THEN BFMOVE:
+SPDSET = SPDSET + 5 
+GOSUB BFMOVE:
+
+FASTER2:
+I$ = ""
+IF SPDSET = 0 THEN BFPAUS:
+SPDSET = SPDSET - 5 
+GOSUB BFPAUS:
+
+SLOWER2:
+I$ = ""
+IF SPDSET = 5000 THEN PAUSE:
+SPDSET = SPDSET + 5 
+GOSUB BFPAUS:
+
+
+QUIT:
+CLS
+END

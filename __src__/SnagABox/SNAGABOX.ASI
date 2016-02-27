@@ -1,0 +1,1626 @@
+DIM SMILE(80)
+DIM ENEMY(24)
+DIM EX(3)
+DIM EY(3)
+DIM CX(24)
+DIM CY(24)
+DIM CHEST(80)
+DIM TESTED(9)
+DIM WALK(80)
+DIM HEAD(80)
+DIM STND(80)
+REM *****MAN'S HEAD DATA*****
+DATA 0,6,6,6,6,6,0,0,0,6,6,6,6,6,6,6,0,0,6,43,6,43,43
+DATA 31,0,0,0,6,43,43,43,43,33,0,0,0,6,6,43,43,43,43
+DATA 43,0,0,0,43,43,43,43,43,0,0,0,0,0,43,43,43,0
+DATA 0,0,0,0,0,43,43,0,0,0,0,0,0,0,2,2,0,0,0,0,0
+REM *****STANDING FEET DATA*****
+DATA 0,10,2,2,2,0,0,0,0 ,0,10,2,2,2,0,0,0,0,0,10,2,2,2,0,0,0,0
+DATA 0,43,2,2,2,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0
+DATA 0,9,9,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,6,6,6,0,0,0,0
+REM *****MOVING FEET DATA*****
+DATA 0,10,10,2,2,0,0,0,0,0,10,2,2,2,0,0,0,0,0,43,2,2,2,43,0,0,0
+DATA 0,0,2,2,2,0,0,0,0,0,0,9,9,9,0,0,0,0,0,0,9,0,0,9,0,0,0,0
+DATA 0,9,0,0,9,0,0,0,6,9,9,0,0,6,6,6,0,6,6,0,0,0,0,0,0,0
+REM *****CHEST DATA*****
+DATA 0,0,14,14,14,14,14,14,0,0,14,39,44,39,14,39,39,44
+DATA 14,39,44,39,39,14,39,14,14,14,39,44,39,39,14,14,39,14
+DATA 14,14,6,14,14,14,39,39,14,14,39,6,39,39,14,39,39,14
+DATA 14,39,39,39,39,14,39,39,14,14,39,39,39,39,14,39,14,0,14
+DATA 14,14,14,14,14,14,0,0
+REM *****NORMAL ENEMY DATA*****
+DATA 0,1,1,1,0,1,31,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0
+REM *****SMILEY FACE DATA*****
+DATA 33,33,33,44,44,44,33,33,33,33,33,44,44,44,44,44,33,33,33
+DATA 44,44,21,44,21,44,44,33,44,44,44,21,44,21,44,44,44,44,44
+DATA 44,44,44,44,44,44,44,44,44,21,44,44,44,21,44,44,33,44,44
+DATA 21,21,21,44,44,33,33,33,44,44,44,44,44,33,33,33,33,33,44
+DATA 44,44,33,33,33
+RESTART:
+XYZ$ = CHR$(0)
+L$ = XYZ$ + "K"
+R$ = XYZ$ + "M"
+U$ = XYZ$ + "H"
+CLS
+LIFE = 5
+STG = 0
+PTS = 0
+NOOFCHESTS = 3
+CLS
+COLOR 14,0
+LOCATE 17,5
+PRINT "  P       R       E       S       E       N       T       S  "
+WHILE (I$ = "")
+I$ = INKEY$
+FOR CLRLOOP = 9 TO 15
+COLOR CLRLOOP,8
+LOCATE 14,5
+PRINT "SOFTWARE"
+COLOR CLRLOOP,0
+LOCATE 5,5
+PRINT "АА       АА                   АА       АА"
+LOCATE 6,5
+PRINT "АА       АА                   АА       АА"
+LOCATE 7,5
+PRINT "ББ       ББ                   ББ       ББ"
+LOCATE 8,5
+PRINT "ББ       ББ                   ББ       ББ"
+LOCATE 9,5
+PRINT "ВВ   В   ВВ   ВВВ   ВВ   ВВВВ ВВ   В   ВВ    ВВ    ВВВВ  ВВВВ"
+LOCATE 10,5
+PRINT "ВВ  ВВВ  ВВ  ВВ ВВ  ВВ   ВВ   ВВ  ВВВ  ВВ   ВВВВ   ВВ ВВ ВВ"
+LOCATE 11,5
+PRINT "лл ллллл лл лл   лл лл   лллл лл ллллл лл  лл  лл  лллл  лллл"
+LOCATE 12,5
+PRINT "ллллл ллллл  лл лл  лл   лл   ллллл ллллл лллллллл лл лл лл"
+LOCATE 13,5
+PRINT "лллл   лллл   ллл   лллл лл   лллл   лллл лл    лл лл олнлллл" 
+START& = TIMER
+TIMES& = 0
+WHILE (TIMES& < 5)
+I$ = INKEY$
+IF I$ <> "" THEN STOPFLASH:
+NOW& = TIMER
+TIMES& = NOW& - START&
+TIMES& = ABS(TIMES&)
+WEND
+NEXT CLRLOOP
+WEND
+STOPFLASH:
+CLS
+COLOR 15,0
+PRINT "ммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммм"
+COLOR 12,0
+PRINT "лл    л  ллллл  ллл   ллллл     ллллллллл   ллллллллл     ллллл   ллл  ллл  л л"
+COLOR 12,0
+PRINT "л  лллл    ллл  лл  л  ллл  ллл  ллллллл  л  лллллллл  лл  ллл  л  лл  ллл  н о"
+COLOR 14,0
+PRINT "л  лллл     лл  лл  л  лл  ллллллллплллл  л  ллллпллл  лл  лл  ллл  лл  л  лн о"
+COLOR 14,0
+PRINT "лл  ллл  л   л  лл  л  лл  ллллллп   плл  л  ллп   пл     ллл  ллл  лллн оллн о"
+COLOR 10,0
+PRINT "ллл  лл  лл  л  л  ллл  л  лллллллм млл  ллл  ллм млл  лл  лл  ллл  лл  л  лн о"
+COLOR 10,0
+PRINT "лллл  л  лл     л       л  ллл   лллллл       ллллллл  ллл  л  ллл  л  ллл  л л"
+COLOR 9,0
+PRINT "лллл  л  ллл    л  ллл  лл  ллл  лллллл  ллл  ллллллл  ллл  лл  л  лл  ллл  л л"
+COLOR 9,0
+PRINT "л    лл  ллллл  л  ллл  ллл     ллллллл  ллл  ллллллл      лллл   ллл  ллл  лпл"
+COLOR 15,0
+PRINT "ппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппп"
+PRINT ""
+COLOR 8,0
+PRINT "лпл м м   лпм м м л  ммм ммм   л   л ммм л  мпБББББББББББББББББББББББББББББББББ"
+COLOR 7,0
+PRINT "лпм л л   л л л л л  ммл л л   л л л л л л  лмБББББББББББББББББББББББББББББББББ"
+COLOR 15,0
+PRINT "лмл  пл   лмп  пл лм лмл л л   лмпмл лмл лм л БББББББББББББББББББББББББББББББББ"
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+I$ = ""
+PRINT ""
+PRINT ""
+PRINT ""
+PRINT ""
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+PRINT "SNAG  A  BOX                                                             MENU"
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+PRINT ""
+COLOR 6,0
+PRINT "                                              кФФФФФФФФП"  
+PRINT "                           кФФФФФФФФФФФФФФФФФФД PRESS  РФП"
+PRINT "START THE GAMEФФФФФФФФФФФФФй                  РП  1   кФФй"
+PRINT "                                               РФФФФФФй"
+PRINT "                                              кФФФФФФФФП"  
+PRINT "                           кФФФФФФФФФФФФФФФФФФД PRESS  РФП"
+PRINT "SEE THE HIGH SCORESФФФФФФФФй                  РП  2   кФФй"
+PRINT "                                               РФФФФФФй"
+PRINT "                                              кФФФФФФФФП"  
+PRINT "                           кФФФФФФФФФФФФФФФФФФД PRESS  РФП"
+PRINT "SEE THE INSTRUCTIONSФФФФФФФй                  РП  3   кФФй"
+PRINT "                                               РФФФФФФй"
+PRINT "                                              кФФФФФФФФП"  
+PRINT "                           кФФФФФФФФФФФФФФФФФФД PRESS  РФП"
+PRINT "EXIT SNAGABOXФФФФФФФФФФФФй                  РП ESC  кФФй"
+PRINT "                                               РФФФФФФй"
+PRINT ""
+PRINT ""
+PRINT ""
+FOR X500 = 0 TO 10
+J$ = INKEY$
+NEXT X500
+I$ = ""
+WHILE (I$ <> "1")
+I$ = INKEY$
+IF I$ = "2" THEN 
+ GOSUB READHS:
+ GOTO RESTART:
+ENDIF
+IF I$ = "3" THEN
+ CALL ("TEXTVIEW.COM"," SNAGABOX.TXT")
+ GOTO RESTART:
+ENDIF
+IF I$ = "" THEN
+CLS
+END
+ENDIF
+WEND
+I$ = ""
+RESTORE
+FOR E = 0 TO 80
+READ HEAD(E)
+NEXT E
+FOR F = 0 TO 80
+READ STND(F)
+NEXT F
+FOR G = 0 TO 80
+READ WALK(G)
+NEXT G
+FOR H = 0 TO 80
+READ CHEST(H)
+NEXT H
+FOR I = 0 TO 24
+READ ENEMY(I)
+NEXT I
+FOR E = 0 TO 80
+READ SMILE(E)
+NEXT E
+NEWSTAGE:
+SCREEN 0
+CLS
+SCREEN 13
+X = 153
+Y = 20
+EX(0) = 10
+EY(0) = 36
+EX(1) = 15
+EY(1) = 76
+EX(2) = 10
+EY(2) = 36
+EX(3) = 15
+EY(3) = 76
+DIREC = 1
+REM - - - SET CHEST LOCATIONS
+RANDOMIZE
+NOOFCHESTS = NOOFCHESTS + 1
+IF NOOFCHESTS > 24 THEN
+ NOOFCHESTS = 24
+ENDIF
+FOR CH = 0 TO NOOFCHESTS
+GOSUB MOVEINPUT:
+R0 = RND(0)
+R1 = RND(1)
+ACX2 = R0 / 1646
+ IF ACX2 <= 1 THEN 
+  CX(CH) = 10
+ ENDIF
+ IF ACX2 = 2 THEN 
+  CX(CH) = 20
+ ENDIF
+ IF ACX2 = 3 THEN 
+  CX(CH) = 30 
+ ENDIF
+ IF ACX2 = 4 THEN 
+  CX(CH) = 40 
+ ENDIF
+ IF ACX2 = 5 THEN 
+  CX(CH) = 50
+ ENDIF
+ IF ACX2 = 6 THEN 
+  CX(CH) = 60
+ ENDIF      
+ IF ACX2 = 7 THEN 
+  CX(CH) = 70 
+ ENDIF
+ IF ACX2 = 8 THEN 
+  CX(CH) = 80 
+ ENDIF
+ IF ACX2 = 9 THEN 
+  CX(CH) = 90 
+ ENDIF
+ IF ACX2 = 10 THEN 
+  CX(CH) = 200 
+ ENDIF
+ IF ACX2 = 10 THEN 
+  CX(CH) = 210 
+ ENDIF
+ IF ACX2 = 11 THEN 
+  CX(CH) = 220 
+ ENDIF
+ IF ACX2 = 12 THEN 
+  CX(CH) = 230 
+ ENDIF
+ IF ACX2 = 13 THEN 
+  CX(CH) = 240 
+ ENDIF
+ IF ACX2 = 14 THEN 
+  CX(CH) = 250 
+ ENDIF
+ IF ACX2 = 15 THEN 
+  CX(CH) = 260 
+ ENDIF
+ IF ACX2 = 16 THEN 
+  CX(CH) = 270 
+ ENDIF
+ IF ACX2 = 17 THEN 
+  CX(CH) = 280 
+ ENDIF
+ IF ACX2 = 18 THEN 
+  CX(CH) = 290 
+ ENDIF
+ IF ACX2 >= 19 THEN 
+  CX(CH) = 300 
+ ENDIF
+ACY2 = R1 / 6687
+ IF ACY2 <= 1 THEN 
+  CY(CH) = 36
+ ENDIF
+ IF ACY2 = 2 THEN 
+  CY(CH) = 76
+ ENDIF
+ IF ACY2 = 3 THEN 
+  CY(CH) = 116
+ ENDIF
+ IF ACY2 >= 4 THEN 
+  CY(CH) = 156
+ ENDIF
+IF CH > 0 THEN
+ CH2 = CH - 1
+ FOR CHKCH = 0 TO CH2
+  IF CY(CHKCH) = CY(CH) THEN
+   IF CX(CHKCH) = CX(CH) THEN
+    CH = CH - 1
+    GOTO STOPCHKCH:
+   ENDIF
+  ENDIF
+ NEXT CHKCH
+ENDIF
+STOPCHKCH:
+NEXT CH
+Y8 = Y+8
+X8 = X+8
+Y9 = Y+9
+Y17 = Y+17
+RESTORE
+FOR ROW = Y TO Y17
+FOR COL = X TO X8
+READ CLRA
+PSET (ROW,COL),CLRA
+NEXT COL
+NEXT ROW
+RESTORE
+MANSPOS = 0
+COLOR 4,0
+LOCATE 0,0
+PRINT "   ппппппппппппппппппппппппппппппппп   "
+LOCATE 6,0
+PRINT "пппппппппппппппп   п   пппппппппппппппп"
+LOCATE 11,0
+PRINT "ппппппппппппппппп     ппппппппппппппппп"
+LOCATE 16,0
+PRINT "пппппппппппппппппп   пппппппппппппппппп"
+LOCATE 21,0
+PRINT "  ллллллллллллллллллллллллллллллллллл  "
+PRINT "  ллллл                         ллллл  "
+PRINT "  ллллллллллллллллллллллллллллллллллл  "
+
+REM ---------- BEGINNING OF MAIN CHARACTER LOOP
+REM  * CODE FOR MOVEMENT OF CHARACTER, DRAWING OF BOXES, AND MOVEMENT OF
+REM    ENEMY
+REM  * BEFORE MAIN CHARACTER WHILE...WEND LOOP, CODE FOR STAGE STARTUP
+
+ROPE = 0
+INROPE = 0
+STG = STG + 1
+COLOR 15,0
+LOCATE 22,7
+PRINT "STAGE";
+PRINT STG;
+COLOR 4,0
+PRINT " LIFE";
+PRINT LIFE
+CHSTS = 0
+LOCATE 12,13
+COLOR 1,0
+PRINT "P";
+COLOR 2,0
+PRINT "R";
+COLOR 4,0
+PRINT "E";
+COLOR 14,0
+PRINT "S";
+COLOR 1,0
+PRINT "S ";
+COLOR 2,0
+PRINT "A";
+COLOR 4,0
+PRINT "N";
+COLOR 14,0
+PRINT "Y ";
+COLOR 1,0
+PRINT "K";
+COLOR 2,0
+PRINT "E";
+COLOR 4,0
+PRINT "Y"
+FOR X500 = 0 TO 10
+J$ = INKEY$
+NEXT X500
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+I$ = ""
+GOSUB STARTSOUND:
+LOCATE 12,13
+PRINT "             "
+LOCATE 22,7
+PRINT "                        "
+WHILE (STOPGAME = 0)
+I$ = INKEY$
+I$ = UCASE$(I$)
+
+LOCATE 22,7
+COLOR 14,0
+PRINT "SCORE";
+COLOR 15,0
+PRINT PTS;
+COLOR 14,0
+PRINT ",";
+COLOR 15,0
+PRINT LIFE;
+COLOR 15,0
+PRINT "x"
+DRAWHEADNUM = 0
+FOR ROW = 176 TO 183
+COL = 217
+FOR COL2 = 209 TO 217
+ PSET (ROW,COL),HEAD(DRAWHEADNUM)
+ DRAWHEADNUM = DRAWHEADNUM + 1
+ COL = COL - 1
+NEXT COL2
+NEXT ROW
+
+FOR ENN = 0 TO 1
+GOSUB MOVEINPUT:
+EX4 = EX(ENN)+4
+EY4 = EY(ENN)+4
+ FOR ROW = EY(ENN) TO EY4
+ FOR COL = EX(ENN) TO EX4
+  PSET (ROW,COL),0
+ NEXT COL
+ NEXT ROW
+ EX(ENN) = EX(ENN) + 2
+ IF EX(ENN) > 310 THEN
+  EX(ENN)=0
+ ENDIF
+ IF EY(ENN) > 180 THEN
+  EY(ENN) = 0
+ ENDIF 
+ EX4 = EX(ENN)+4
+ EY4 = EY(ENN)+4
+ EY7 = EY(ENN)+5
+ FOR EY2 = EY(ENN) TO EY4
+ FOR EX2 = EX(ENN) TO EX4
+ TESTER = POINT (EY2,EX2)
+ IF TESTER = 4 THEN
+  EX(ENN) = EX(ENN) - 2
+  EX4 = EX(ENN)+4
+  EY4 = EY(ENN)+4
+  EY7 = EY(ENN)+5
+  ENDIF
+  NEXT EX2
+  NEXT EY2
+ NMB = 0
+ FOR EX2 = EX(ENN) TO EX4
+ TESTED(NMB) = POINT(EY7,EX2)
+ NMB = NMB + 1
+ NEXT EX2
+ FOR CHECKBUFR = 0 TO 4
+  IF TESTED(CHECKBUFR) = 4 THEN
+   TST4RED = TST4RED+1
+  ENDIF
+ NEXT CHECKBUFR
+ IF TST4RED = 0 THEN
+ EY(ENN) = EY(ENN) + 1
+ EX4 = EX(ENN)+4
+ EY4 = EY(ENN)+4
+ EY7 = EY(ENN)+5
+ ENDIF
+ TST4RED = 0
+ E = 0
+ FOR ROW = EY(ENN) TO EY4
+ FOR COL = EX(ENN) TO EX4
+  IF ENEMY(E) <> 0 THEN
+  PSET (ROW,COL),ENEMY(E)
+  ENDIF
+  E = E + 1
+ NEXT COL
+ NEXT ROW
+ EX4 = EX(ENN)+4
+ EY4 = EY(ENN)+4
+FOR ROW = Y TO Y17
+FOR COL = X TO X8
+
+ IF ROW = EY(ENN) THEN
+  IF COL = EX(ENN) THEN
+   GOSUB DAMAGER:
+   GOTO STOPENCHK1:
+  ENDIF
+  IF COL = EX4 THEN
+   GOSUB DAMAGER:
+   GOTO STOPENCHK1:
+  ENDIF
+ ENDIF
+ IF ROW = EY4 THEN
+  IF COL = EX(ENN) THEN
+   GOSUB DAMAGER:
+   GOTO STOPENCHK1:
+  ENDIF
+  IF COL = EX4 THEN
+   GOSUB DAMAGER:
+   GOTO STOPENCHK1:
+  ENDIF
+ ENDIF
+NEXT COL
+NEXT ROW
+STOPENCHK1:    
+NEXT ENN
+
+FOR ENN = 2 TO 3
+GOSUB MOVEINPUT:
+EX4 = EX(ENN)+4
+EY4 = EY(ENN)+4
+ FOR ROW = EY(ENN) TO EY4
+ FOR COL = EX(ENN) TO EX4
+  PSET (ROW,COL),0
+ NEXT COL
+ NEXT ROW
+ EX(ENN) = EX(ENN) - 2
+ IF EX(ENN) < 0 THEN
+  EX(ENN)=310
+ ENDIF
+ IF EY(ENN) > 180 THEN
+  EY(ENN) = 0
+ ENDIF 
+ EX4 = EX(ENN)+4
+ EY4 = EY(ENN)+4
+ EY7 = EY(ENN)+5
+ FOR EY2 = EY(ENN) TO EY4
+ FOR EX2 = EX(ENN) TO EX4
+ TESTER = POINT (EY2,EX2)
+ IF TESTER = 4 THEN
+  EX(ENN) = EX(ENN) + 2
+  EX4 = EX(ENN)+4
+  EY4 = EY(ENN)+4
+  EY7 = EY(ENN)+5
+  ENDIF
+  NEXT EX2
+  NEXT EY2
+ NMB = 0
+ FOR EX2 = EX(ENN) TO EX4
+ TESTED(NMB) = POINT(EY7,EX2)
+ NMB = NMB + 1
+ NEXT EX2
+ FOR CHECKBUFR = 0 TO 4
+  IF TESTED(CHECKBUFR) = 4 THEN
+   TST4RED = TST4RED+1
+  ENDIF
+ NEXT CHECKBUFR
+ IF TST4RED = 0 THEN
+ EY(ENN) = EY(ENN) + 1
+ EX4 = EX(ENN)+4
+ EY4 = EY(ENN)+4
+ EY7 = EY(ENN)+5
+ ENDIF
+ TST4RED = 0
+ E = 0
+ FOR ROW = EY(ENN) TO EY4
+ FOR COL = EX(ENN) TO EX4
+  IF ENEMY(E) <> 0 THEN
+  PSET (ROW,COL),ENEMY(E)
+  ENDIF
+  E = E + 1
+ NEXT COL
+ NEXT ROW
+ EX4 = EX(ENN)+4
+ EY4 = EY(ENN)+4
+FOR ROW = Y TO Y17
+FOR COL = X TO X8
+ IF ROW = EY(ENN) THEN
+  IF COL = EX(ENN) THEN
+   GOSUB DAMAGER:
+   GOTO STOPENCHK2:
+  ENDIF
+  IF COL = EX4 THEN
+   GOSUB DAMAGER:
+   GOTO STOPENCHK2:
+  ENDIF
+ ENDIF
+ IF ROW = EY4 THEN
+  IF COL = EX(ENN) THEN
+   GOSUB DAMAGER:
+   GOTO STOPENCHK2:
+  ENDIF
+  IF COL = EX4 THEN
+   GOSUB DAMAGER:
+   GOTO STOPENCHK2:
+  ENDIF
+ ENDIF
+NEXT COL
+NEXT ROW
+STOPENCHK2:
+NEXT ENN
+
+FOR CH = 0 TO NOOFCHESTS
+GOSUB MOVEINPUT:
+IF CY(CH) = 500 THEN SKIP:
+CY8 = CY(CH) + 8
+CX8 = CX(CH) + 8
+E = 0
+   FOR ROW = CY(CH) TO CY8
+   FOR COL = CX(CH) TO CX8
+   IF CHEST(E) <> 0 THEN
+   PSET (ROW,COL),CHEST(E)
+   ENDIF
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+SKIP: NEXT CH
+IF LIFE < 1 THEN GAMEOVER:
+IF TOLIFE >= 500 THEN
+ TOLIFE = TOLIFE - 500
+ LIFE = LIFE + 1
+ENDIF
+NOOFCHESTS2 = NOOFCHESTS + 1
+IF CHSTS = NOOFCHESTS2 THEN NEWSTAGE:
+IF JUMP = 1 THEN
+ GOSUB JUMPER:
+ELSE
+ Y18 = Y+18
+ NMB = 0
+ FOR X2 = X TO X8
+ TESTED(NMB) = POINT(Y18,X2)
+ NMB = NMB + 1
+ NEXT X2
+ FOR CHECKBUFR = 0 TO 9
+  IF TESTED(CHECKBUFR) = 4 THEN
+   TST4RED = TST4RED+1
+  ENDIF
+ NEXT CHECKBUFR
+ IF TST4RED = 0 THEN
+ INJUMP = 29
+ GOSUB JUMPER:
+ INJUMP = 30
+ JUMP = 1
+ ENDIF
+ TST4RED = 0
+ENDIF
+IF Y > 180 THEN
+  FOR ROW = Y TO Y17
+  FOR COL = X TO X8
+  PSET (ROW,COL),0
+  NEXT COL
+  NEXT ROW
+ Y = 0
+ Y8 = Y+8
+ Y9 = Y+9
+ Y17 = Y+17
+ENDIF
+IF ROPE = 1 THEN 
+ GOSUB ROPER:
+ENDIF
+GOSUB MOVEINPUT:
+WEND
+
+JUMPER:
+FOR ROW = Y TO Y17
+FOR COL = X TO X8
+PSET (ROW,COL),0
+NEXT COL
+NEXT ROW
+INJUMP = INJUMP + 1
+IF INJUMP <= 15 THEN
+  Y = Y - 1
+ MOVMENT = 2
+ YM1 = Y - 1
+ NMB = 0
+ FOR X2 = X TO X8
+ TESTED(NMB) = POINT(YM1,X2)
+ NMB = NMB + 1
+ NEXT X2
+ FOR CHECKBUFR = 0 TO 9
+  IF TESTED(CHECKBUFR) = 4 THEN
+   TST4RED = TST4RED+1
+  ENDIF
+ NEXT CHECKBUFR
+ IF TST4RED <> 0 THEN
+ INJUMP = 16
+ MOVMENT = 4
+ ENDIF
+ TST4RED = 0
+ELSE
+ Y = Y + 1
+ Y18 = Y+18
+ NMB = 0
+ FOR X2 = X TO X8
+ TESTED(NMB) = POINT(Y18,X2)
+ NMB = NMB + 1
+ NEXT X2
+ FOR CHECKBUFR = 0 TO 9
+  IF TESTED(CHECKBUFR) = 4 THEN
+   TST4RED = TST4RED+1
+  ENDIF
+ NEXT CHECKBUFR
+ IF TST4RED <> 0 THEN
+ INJUMP = 30
+ MOVMENT = 4
+ ENDIF
+ TST4RED = 0
+ENDIF
+ Y8 = Y+8
+ X8 = X+8
+ Y9 = Y+9
+ Y17 = Y+17
+IF INJUMP = 30 THEN
+  JUMP = 0
+  INJUMP = 0
+  MANSPOS = 0
+ENDIF
+IF INJUMP <> 0 THEN
+ Y8 = Y+8
+ X8 = X+8
+ Y9 = Y+9
+ Y17 = Y+17
+ IF DIREC = 1 THEN
+  E = 0
+  FOR ROW = Y TO Y8
+  FOR COL = X TO X8
+  IF HEAD(E) <> 0 THEN
+   PSET (ROW,COL),HEAD(E)
+  ENDIF
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  E = 0
+  FOR ROW = Y9 TO Y17
+  FOR COL = X TO X8
+  IF WALK(E) <> 0 THEN
+   PSET (ROW,COL),WALK(E)
+  ENDIF
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  MANSPOS = 0
+ ENDIF
+ IF DIREC = -1 THEN
+  E = 0
+  FOR ROW = Y TO Y8
+  REALCOL = X8
+  FOR COL = X TO X8
+  IF HEAD(E) <> 0 THEN
+   PSET (ROW,REALCOL),HEAD(E)
+  ENDIF
+   REALCOL = REALCOL - 1
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  E = 0
+  FOR ROW = Y9 TO Y17
+  REALCOL = X8
+  FOR COL = X TO X8
+  IF WALK(E) <> 0 THEN
+   PSET (ROW,REALCOL),WALK(E)
+  ENDIF
+   REALCOL = REALCOL - 1
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  MANSPOS = 0
+ ENDIF
+ELSE
+ IF DIREC = 1 THEN
+  E = 0
+  FOR ROW = Y TO Y8
+  FOR COL = X TO X8
+  IF HEAD(E) <> 0 THEN
+   PSET (ROW,COL),HEAD(E)
+  ENDIF
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  E = 0
+  FOR ROW = Y9 TO Y17
+  FOR COL = X TO X8
+  IF STND(E) <> 0 THEN
+   PSET (ROW,COL),STND(E)
+  ENDIF
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  MANSPOS = 0
+ ENDIF
+ IF DIREC = -1 THEN
+  E = 0
+  FOR ROW = Y TO Y8
+  REALCOL = X8
+  FOR COL = X TO X8
+  IF HEAD(E) <> 0 THEN
+   PSET (ROW,REALCOL),HEAD(E)
+  ENDIF
+   REALCOL = REALCOL - 1
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  E = 0
+  FOR ROW = Y9 TO Y17
+  REALCOL = X8
+  FOR COL = X TO X8
+  IF STND(E) <> 0 THEN
+   PSET (ROW,REALCOL),STND(E)
+  ENDIF
+   REALCOL = REALCOL - 1
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  MANSPOS = 0
+ ENDIF
+ENDIF
+RETURN
+
+
+ROPER:
+INROPE = INROPE + 1
+IF INROPE <= 5 THEN
+IF RD = 1 THEN
+ RX = RX + 8
+ RX8 = RX + 8
+ FOR ROPECOL = RX TO RX8
+  GOSUB MOVEINPUT:
+  FOR CH = 0 TO NOOFCHESTS
+   GOSUB MOVEINPUT:
+   CX0 = CX(CH)
+   CX8 = CX(CH)+8
+   CY0 = CY(CH)
+   CY8 = CY(CH)+8
+   FOR CX2 = CX0 TO CX8
+   FOR CY2 = CY0 TO CY8
+   IF ROPECOL = CX2 THEN
+    IF RY = CY2 THEN
+     PTS = PTS + 10
+     TOLIFE = TOLIFE + 10
+     E = 0
+     FOR ROW = CY0 TO CY8
+     FOR COL = CX0 TO CX8
+      PSET (ROW,COL),SMILE(E)
+      E = E + 1
+     NEXT COL
+     NEXT ROW
+     CY(CH) = 500
+     CHSTS = CHSTS + 1
+     CX(CH) = 500
+    ENDIF
+   ENDIF
+  NEXT CY2
+  NEXT CX2
+  NEXT CH
+  FOR EN = 0 TO 3
+   EX0 = EX(EN)
+   EX8 = EX(EN)+4
+   EY0 = EY(EN)
+   EY8 = EY(EN)+4
+   FOR EX2 = EX0 TO EX8
+   FOR EY2 = EY0 TO EY8
+   IF ROPECOL = EX2 THEN
+    IF RY = EY2 THEN
+     FOR ROW = EY0 TO EY8
+     FOR COL = EX0 TO EX8
+      PSET (ROW,COL),0
+     NEXT COL
+     NEXT ROW
+     PTS = PTS + 1
+     TOLIFE = TOLIFE + 1
+     EY(EN) = 156
+     EX(EN) = 160
+    ENDIF
+   ENDIF
+  NEXT EY2
+  NEXT EX2
+  NEXT EN
+  PSET (RY,ROPECOL),6
+ NEXT ROPECOL
+ELSE
+ RX = RX - 8
+ RX8 = RX - 8
+ FOR ROPECOL = RX8 TO RX
+  GOSUB MOVEINPUT:
+  FOR CH = 0 TO NOOFCHESTS
+   GOSUB MOVEINPUT:
+   CX0 = CX(CH)
+   CX8 = CX(CH)+8
+   CY0 = CY(CH)
+   CY8 = CY(CH)+8
+   FOR CX2 = CX0 TO CX8
+   FOR CY2 = CY0 TO CY8
+   IF ROPECOL = CX2 THEN
+    IF RY = CY2 THEN
+     PTS = PTS + 10
+     TOLIFE = TOLIFE + 10
+     E = 0
+     FOR ROW = CY0 TO CY8
+     FOR COL = CX0 TO CX8
+      PSET (ROW,COL),SMILE(E)
+      E = E + 1
+     NEXT COL
+     NEXT ROW
+     CY(CH) = 500
+     CHSTS = CHSTS + 1
+     CX(CH) = 500
+    ENDIF
+   ENDIF
+  NEXT CY2
+  NEXT CX2
+  NEXT CH
+  FOR EN = 0 TO 3
+   EX0 = EX(EN)
+   EX8 = EX(EN)+4
+   EY0 = EY(EN)
+   EY8 = EY(EN)+4
+   FOR EX2 = EX0 TO EX8
+   FOR EY2 = EY0 TO EY8
+   IF ROPECOL = EX2 THEN
+    IF RY = EY2 THEN
+     FOR ROW = EY0 TO EY8
+     FOR COL = EX0 TO EX8
+      PSET (ROW,COL),0
+     NEXT COL
+     NEXT ROW
+     PTS = PTS + 1
+     TOLIFE = TOLIFE + 1
+     EY(EN) = 156
+     EX(EN) = 160
+    ENDIF
+   ENDIF
+  NEXT EY2
+  NEXT EX2
+  NEXT EN
+ PSET (RY,ROPECOL),6
+ NEXT ROPECOL
+ENDIF
+ENDIF
+IF INROPE > 5 THEN
+ IF INROPE > 6 THEN
+  IF RD = 1 THEN
+   RX = RX - 8
+   RX8 = RX + 8
+  ELSE  
+   RX = RX + 8
+   RX8 = RX - 8
+  ENDIF
+ ENDIF
+IF RD = 1 THEN
+ CLRROPE = RX8
+ FOR ROPECOL = RX TO RX8
+  PSET (RY,CLRROPE),0
+ CLRROPE = CLRROPE - RD
+ NEXT ROPECOL
+ELSE
+ FOR ROPECOL = RX8 TO RX
+  PSET (RY,ROPECOL),0
+ NEXT ROPECOL
+ENDIF
+ENDIF
+IF INROPE >= 10 THEN
+ ROPE = 0
+ INROPE = 0
+ENDIF
+RETURN
+
+GAMEOVER:
+SCREEN 0
+CLS
+GOSUB STARTSOUND:
+COLOR 15,0
+PRINT "лллллл   лллл   ллл  лллл  л     лллллллллл   ллл  ллл  л     л    ллн оллллллл"
+PRINT "ллллл  л  лл  л  лл   лл   л  лллллллллллл  л  лл  ллл  л  лллл  л  лн оллллллл"
+COLOR 8,0
+PRINT "лллл  лллллл  л  лл        л    ллллллллл  ллл  л  ллл  л    лл  л  лн оллллллл"
+PRINT "лллл  лм  л  ллл  л  л  л  л  ллллллллллл  ллл  лл  л  лл  лллл    ллл лллллллл"
+COLOR 7,0
+PRINT "ллллл  л  л       л  лллл  л  лллллллллллл  л  ллл  л  лл  лллл  л  ллплллллллл"
+PRINT "лллллл   лл  ллл  л  лллл  л     лллллллллл   ллллл   ллл     л  л  лм мллллллл"
+COLOR 15,0
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+PRINT " ААА А   А  А   ААА        А        АА   А   А  А ААААААААААААААААААААААААААААА"
+PRINT "А    АА  А А А А      А   А А   А   А А А А  А А АААААААААААААААААААААААААААААА"
+PRINT " ББ  Б Б Б Б Б Б     БББ  Б Б  БББ  ББ  Б Б   Б БББББББББББББББББББББББББББББББ"
+PRINT "   Б Б Б Б Б Б Б ББ   Б   Б Б   Б   Б Б Б Б  Б Б ББББББББББББББББББББББББББББББ"
+PRINT "   В В  ВВ ВВВ В  В       ВВВ       В В В В  В  В ВВВВВВВВВВВВВВВВВВВВВВВВВВВВВ"
+PRINT "ВВВ  В   В В В  ВВВ       В В       ВВ   В    В  В ВВВВВВВВВВВВВВВВВВВВВВВВВВВВ"
+GOSUB STARTSOUND:
+FOR X500 = 0 TO 10
+J$ = INKEY$
+NEXT X500
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+GOSUB HISCORE:
+GOTO RESTART:
+
+DAMAGER:
+    SOUND 15000,30
+    SOUND 5000,30
+    SOUND 10000,30
+    FOR CROW = Y TO Y17
+    FOR CCOL = X TO X8
+     PSET (CROW,CCOL),0
+    NEXT CCOL
+    NEXT CROW
+    E = 0
+    Y = 20
+    X = 153
+    IF JUMP = 1 THEN
+     INJUMP = 30   
+    ENDIF
+    IF ROPE = 1 THEN
+     ROPE = 0
+     INROPE = 0
+     RX8 = RX + 8
+     FOR ROPECOL = ORIGRX TO RX8
+      PSET (RY,ROPECOL),0
+     NEXT ROPECOL
+    ENDIF
+    X8 = X + 8
+    Y17 = Y + 17
+    Y9 = Y + 9
+    Y8 = Y + 8
+    FOR ROW3 = Y TO Y8
+    REALCOL = X8
+    FOR COL3 = X TO X8
+    IF HEAD(E) <> 0 THEN
+    PSET (ROW3,REALCOL),HEAD(E)
+    ENDIF
+    REALCOL = REALCOL - 1
+    E = E + 1
+    NEXT COL3
+    NEXT ROW3
+    E = 0
+    FOR ROW3 = Y9 TO Y17
+    REALCOL = X8
+    FOR COL3 = X TO X8
+     IF STND(E) <> 0 THEN
+     PSET (ROW3,REALCOL),STND(E)
+     ENDIF
+     REALCOL = REALCOL - 1
+     E = E + 1
+    NEXT COL3
+    NEXT ROW3
+    MANSPOS = 0
+    DIREC = -1
+    LIFE = LIFE - 1
+RETURN
+
+STARTSOUND:
+SOUND 5000,20
+SOUND 6000,20
+SOUND 7000,20
+TME& = 0
+START& = TIMER
+WHILE (TME& < 3)
+NOW& = TIMER
+TME& = START& - NOW&
+TME& = ABS(TME&)
+WEND
+SOUND 8000,20
+SOUND 8000,20
+TME& = 0
+START& = TIMER
+WHILE (TME& < 5)
+NOW& = TIMER
+TME& = START& - NOW&
+TME& = ABS(TME&)
+WEND
+SOUND 5000,20
+SOUND 6000,20
+SOUND 7000,20
+TME& = 0
+START& = TIMER
+WHILE (TME& < 3)
+NOW& = TIMER
+TME& = START& - NOW&
+TME& = ABS(TME&)
+WEND
+SOUND 9000,20
+SOUND 8000,20
+TME& = 0
+START& = TIMER
+WHILE (TME& < 5)
+NOW& = TIMER
+TME& = START& - NOW&
+TME& = ABS(TME&)
+WEND
+RETURN
+
+HISCORE:
+SCREEN 0
+CLS
+OPEN "I",1,"HISCORE.DAT"
+ INPUT# 1,NAME1$
+ INPUT# 1,NAME2$
+ INPUT# 1,NAME3$
+ INPUT# 1,NAME4$
+ INPUT# 1,NAME5$
+ INPUT# 1,SCORE1
+ INPUT# 1,SCORE2
+ INPUT# 1,SCORE3
+ INPUT# 1,SCORE4
+ INPUT# 1,SCORE5
+CLOSE 1
+COLOR 15,0
+PRINT "ммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммм"
+COLOR 9,0
+PRINT "лллллл  л  л    ллл   лл  л  ллллл   ллл   лллл   ллл    лл    лл   лн оллллллл"
+COLOR 10,0
+PRINT "лллллл  л  лл  ллл  лллл  л  лллл  лллл  л  лл  л  лл  л  л  ллл  лллн оллллллл"
+COLOR 11,0
+PRINT "лллллл     лл  лл  лл  л     ллллл  лл  ллллл  ллл  л  л  л   ллл  ллл лллллллл"
+COLOR 12,0
+PRINT "лллллл  л  лл  ллл  л  л  л  лллллл  лл  л  лл  л  лл    лл  ллллл  ллплллллллл"
+COLOR 13,0
+PRINT "лллллл  л  л    ллл   лл  л  лллл   лллл   лллл   ллл  л  л    л   ллм мллллллл"
+COLOR 15,0
+PRINT "ппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппп"
+COLOR 14,8
+PRINT ">>>>>>>>>>>>>>   T H E   T O P   F I V E   P L A Y E R S ! ! !   <<<<<<<<<<<<<<"
+COLOR 15,0
+PRINT ""
+PRINT ""
+PRINT ""
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+COLOR 14,1
+PRINT "                                                                     "
+COLOR 14,4
+PRINT "                              * * * * * * * * * *                              "
+COLOR 14,1
+PRINT "                                                                     "
+COLOR 14,4
+PRINT "                              љ љ љ љ љ љ љ љ љ љ                              "
+COLOR 14,1
+PRINT "                              њ њ њ њ њ њ њ њ њ њ                              " 
+COLOR 15,0
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+COLOR 15,1
+LOCATE 12,0
+PRINT NAME1$
+LOCATE 13,0
+COLOR 15,4
+PRINT NAME2$
+LOCATE 14,0
+COLOR 15,1
+PRINT NAME3$
+LOCATE 15,0
+COLOR 15,4
+PRINT NAME4$
+LOCATE 16,0
+COLOR 15,1
+PRINT NAME5$
+LOCATE 12,72
+PRINT SCORE1
+LOCATE 13,72
+COLOR 15,4
+PRINT SCORE2
+LOCATE 14,72
+COLOR 15,1
+PRINT SCORE3
+LOCATE 15,72
+COLOR 15,4
+PRINT SCORE4
+LOCATE 16,72
+COLOR 15,1
+PRINT SCORE5
+COLOR 10,0
+LOCATE 21,0
+IF PTS > SCORE1 THEN
+ NAME5$ = NAME4$
+ NAME4$ = NAME3$
+ NAME3$ = NAME2$
+ NAME2$ = NAME1$
+ PRINT "You are #1!"                     
+ INPUT YOURNAME$
+ NAME1$ = YOURNAME$
+ SCORE5 = SCORE4
+ SCORE4 = SCORE3
+ SCORE3 = SCORE2
+ SCORE2 = SCORE1
+ SCORE1 = PTS
+GOTO DONE:
+ENDIF
+IF PTS > SCORE2 THEN
+ NAME5$ = NAME4$
+ NAME4$ = NAME3$
+ NAME3$ = NAME2$
+ PRINT "You are #2!"                     
+ INPUT YOURNAME$
+ NAME2$ = YOURNAME$
+ SCORE5 = SCORE4
+ SCORE4 = SCORE3
+ SCORE3 = SCORE2
+ SCORE2 = PTS
+GOTO DONE:
+ENDIF
+IF PTS > SCORE3 THEN
+ NAME5$ = NAME4$
+ NAME4$ = NAME3$
+ PRINT "You are #3!"
+ INPUT YOURNAME$
+ NAME3$ = YOURNAME$
+ SCORE5 = SCORE4
+ SCORE4 = SCORE3
+ SCORE3 = PTS
+GOTO DONE:
+ENDIF
+IF PTS > SCORE4 THEN
+ NAME5$ = NAME4$
+ PRINT "You are #4!"                     
+ INPUT YOURNAME$
+ NAME1$ = YOURNAME$
+ SCORE5 = SCORE4
+ SCORE4 = PTS
+GOTO DONE:
+ENDIF
+IF PTS > SCORE5 THEN
+ PRINT "You are #5!"   
+ INPUT YOURNAME$
+ NAME5$ = YOURNAME$
+ SCORE5 = PTS
+GOTO DONE:
+ENDIF
+ PRINT "Sorry, you didn't get on the HIGH SCORE LIST."
+ I$ = ""
+ WHILE (I$ = "")
+ I$ = INKEY$
+ WEND
+DONE:
+OPEN "O",1,"HISCORE.DAT"
+ PRINT# 1,NAME1$
+ PRINT# 1,NAME2$
+ PRINT# 1,NAME3$
+ PRINT# 1,NAME4$
+ PRINT# 1,NAME5$
+ PRINT# 1,SCORE1
+ PRINT# 1,SCORE2
+ PRINT# 1,SCORE3
+ PRINT# 1,SCORE4
+ PRINT# 1,SCORE5
+CLOSE 1
+CLS
+COLOR 15,0
+PRINT "ммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммм"
+COLOR 9,0
+PRINT "лллллл  л  л    ллл   лл  л  ллллл   ллл   лллл   ллл    лл    лл   лн оллллллл"
+COLOR 10,0
+PRINT "лллллл  л  лл  ллл  лллл  л  лллл  лллл  л  лл  л  лл  л  л  ллл  лллн оллллллл"
+COLOR 11,0
+PRINT "лллллл     лл  лл  лл  л     ллллл  лл  ллллл  ллл  л  л  л   ллл  ллл лллллллл"
+COLOR 12,0
+PRINT "лллллл  л  лл  ллл  л  л  л  лллллл  лл  л  лл  л  лл    лл  ллллл  ллплллллллл"
+COLOR 13,0
+PRINT "лллллл  л  л    ллл   лл  л  лллл   лллл   лллл   ллл  л  л    л   ллм мллллллл"
+COLOR 15,0
+PRINT "ппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппп"
+COLOR 14,8
+PRINT ">>>>>>>>>>>>>>   T H E   T O P   F I V E   P L A Y E R S ! ! !   <<<<<<<<<<<<<<"
+COLOR 15,0
+PRINT ""
+PRINT ""
+PRINT ""
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+COLOR 14,1
+PRINT "                                                                     "
+COLOR 14,4
+PRINT "                              * * * * * * * * * *                              "
+COLOR 14,1
+PRINT "                                                                     "
+COLOR 14,4
+PRINT "                              љ љ љ љ љ љ љ љ љ љ                              "
+COLOR 14,1
+PRINT "                              њ њ њ њ њ њ њ њ њ њ                              " 
+COLOR 15,0
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+COLOR 15,1
+LOCATE 12,0
+PRINT NAME1$
+LOCATE 13,0
+COLOR 15,4
+PRINT NAME2$
+LOCATE 14,0
+COLOR 15,1
+PRINT NAME3$
+LOCATE 15,0
+COLOR 15,4
+PRINT NAME4$
+LOCATE 16,0
+COLOR 15,1
+PRINT NAME5$
+LOCATE 12,72
+PRINT SCORE1
+LOCATE 13,72
+COLOR 15,4
+PRINT SCORE2
+LOCATE 14,72
+COLOR 15,1
+PRINT SCORE3
+LOCATE 15,72
+COLOR 15,4
+PRINT SCORE4
+LOCATE 16,72
+COLOR 15,1
+PRINT SCORE5
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$ 
+WEND
+RETURN
+
+READHS:
+OPEN "I",1,"HISCORE.DAT"
+ INPUT# 1,NAME1$
+ INPUT# 1,NAME2$
+ INPUT# 1,NAME3$
+ INPUT# 1,NAME4$
+ INPUT# 1,NAME5$
+ INPUT# 1,SCORE1
+ INPUT# 1,SCORE2
+ INPUT# 1,SCORE3
+ INPUT# 1,SCORE4
+ INPUT# 1,SCORE5
+CLOSE 1
+CLS
+COLOR 15,0
+PRINT "ммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммммм"
+COLOR 9,0
+PRINT "лллллл  л  л    ллл   лл  л  ллллл   ллл   лллл   ллл    лл    лл   лн оллллллл"
+COLOR 10,0
+PRINT "лллллл  л  лл  ллл  лллл  л  лллл  лллл  л  лл  л  лл  л  л  ллл  лллн оллллллл"
+COLOR 11,0
+PRINT "лллллл     лл  лл  лл  л     ллллл  лл  ллллл  ллл  л  л  л   ллл  ллл лллллллл"
+COLOR 12,0
+PRINT "лллллл  л  лл  ллл  л  л  л  лллллл  лл  л  лл  л  лл    лл  ллллл  ллплллллллл"
+COLOR 13,0
+PRINT "лллллл  л  л    ллл   лл  л  лллл   лллл   лллл   ллл  л  л    л   ллм мллллллл"
+COLOR 15,0
+PRINT "ппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппп"
+COLOR 14,8
+PRINT ">>>>>>>>>>>>>>   T H E   T O P   F I V E   P L A Y E R S ! ! !   <<<<<<<<<<<<<<"
+COLOR 15,0
+PRINT ""
+PRINT ""
+PRINT ""
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+COLOR 14,1
+PRINT "                                                                     "
+COLOR 14,4
+PRINT "                              * * * * * * * * * *                              "
+COLOR 14,1
+PRINT "                                                                     "
+COLOR 14,4
+PRINT "                              љ љ љ љ љ љ љ љ љ љ                              "
+COLOR 14,1
+PRINT "                              њ њ њ њ њ њ њ њ њ њ                              " 
+COLOR 15,0
+PRINT "њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ њљ**љњ"
+COLOR 15,1
+LOCATE 12,0
+PRINT NAME1$
+LOCATE 13,0
+COLOR 15,4
+PRINT NAME2$
+LOCATE 14,0
+COLOR 15,1
+PRINT NAME3$
+LOCATE 15,0
+COLOR 15,4
+PRINT NAME4$
+LOCATE 16,0
+COLOR 15,1
+PRINT NAME5$
+LOCATE 12,72
+PRINT SCORE1
+LOCATE 13,72
+COLOR 15,4
+PRINT SCORE2
+LOCATE 14,72
+COLOR 15,1
+PRINT SCORE3
+LOCATE 15,72
+COLOR 15,4
+PRINT SCORE4
+LOCATE 16,72
+COLOR 15,1
+PRINT SCORE5
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$ 
+WEND
+RETURN
+
+
+AREYOUSURE:
+LOCATE 22,7
+COLOR 15,0
+PRINT "QUIT (y/n)?              "
+I$ = ""
+WHILE (STOPIT = 0)
+I$ = INKEY$
+I$ = UCASE$(I$)
+IF I$ = "Y" THEN
+ LOCATE 22,7
+ PRINT "EXIT TO DOS OR TITLE (D/T)"
+ WHILE (STOPIT2 = 0)
+  I$ = INKEY$
+  I$ = UCASE$(I$)
+  IF I$ = "P" THEN
+   LIFE = 100
+   GOTO NOTHANKS:
+  ENDIF
+  IF I$ = "D" THEN
+   SCREEN 0
+   CLS
+   END
+  ENDIF
+  IF I$ = "T" THEN
+   GOTO GAMEOVER:
+   SCREEN 0
+   CLS
+   GOTO RESTART:
+  ENDIF
+ WEND
+ENDIF
+IF I$ = "N" THEN NOTHANKS:
+WEND
+
+MOVEINPUT:
+I$ = INKEY$
+I$ = UCASE$(I$)
+IF I$ = U$ THEN
+ I$ = "8"
+ENDIF
+IF I$ = "8" THEN
+ IF JUMP = 0 THEN
+ SOUND 31000,1
+ JUMP = 1
+ ENDIF
+ENDIF
+IF I$ = "" THEN
+GOTO AREYOUSURE:
+NOTHANKS:
+ENDIF
+IF I$ = L$ THEN
+ I$ = "4"
+ENDIF
+IF I$ = R$ THEN
+ I$ = "6"
+ENDIF
+IF I$ = U$ THEN
+ I$ = "8"
+ENDIF
+IF I$ = "4" THEN
+  IF INJUMP <> 0 THEN 
+   MOVMENT = 2
+   MANSPOS = 0
+  ELSE
+   MOVMENT = 4
+  ENDIF
+  IF DIREC = 1 THEN 
+   IF MANSPOS = 1 THEN
+    MANSPOS = 0
+   ELSE
+    MANSPOS = 1
+   ENDIF
+  ENDIF
+  DIREC = -1
+  FOR ROW = Y TO Y17
+  FOR COL = X TO X8
+  PSET (ROW,COL),0
+  NEXT COL
+  NEXT ROW
+  X = X - MOVMENT
+  IF X < 0 THEN
+   X = 310
+  ENDIF
+  Y8 = Y+8
+  X8 = X+8
+  Y9 = Y+9
+  Y17 = Y+17
+  Y18 = Y+18
+  FOR Y2 = Y TO Y17
+  FOR X2 = X TO X8
+  TESTER = POINT (Y2,X2)
+  IF TESTER = 4 THEN
+   X = X + MOVMENT
+   X8 = X+8
+  ENDIF
+  NEXT X2
+  NEXT Y2
+  E = 0
+  FOR ROW = Y TO Y8
+  REALCOL = X8
+  FOR COL = X TO X8
+  IF HEAD(E) <> 0 THEN
+   PSET (ROW,REALCOL),HEAD(E)
+  ENDIF
+   REALCOL = REALCOL - 1
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+ IF MANSPOS = 0 THEN
+  E = 0
+  FOR ROW = Y9 TO Y17
+  REALCOL = X8
+  FOR COL = X TO X8
+  IF WALK(E) <> 0 THEN
+   PSET (ROW,REALCOL),WALK(E)
+  ENDIF
+   REALCOL = REALCOL - 1
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  MANSPOS = 1
+ ELSE
+  E = 0
+  FOR ROW = Y9 TO Y17
+  REALCOL = X8
+  FOR COL = X TO X8
+   IF STND(E) <> 0 THEN
+   PSET (ROW,REALCOL),STND(E)
+   ENDIF
+   REALCOL = REALCOL - 1
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  MANSPOS = 0
+ ENDIF 
+ENDIF
+
+IF I$ = "6" THEN
+  IF INJUMP <> 0 THEN 
+   MOVMENT = 2
+   MANSPOS = 0
+  ELSE
+   MOVMENT = 4
+  ENDIF
+  IF DIREC = -1 THEN 
+   IF MANSPOS = 1 THEN
+    MANSPOS = 0
+   ELSE
+    MANSPOS = 1
+   ENDIF
+  ENDIF
+  DIREC = 1
+  FOR ROW = Y TO Y17
+  FOR COL = X TO X8
+  PSET (ROW,COL),0
+  NEXT COL
+  NEXT ROW
+  X = X + MOVMENT
+  IF X > 310 THEN
+   X = 3
+  ENDIF
+  Y8 = Y+8
+  X8 = X+8
+  Y9 = Y+9
+  Y17 = Y+17
+  FOR Y2 = Y TO Y17
+  FOR X2 = X TO X8
+  TESTER = POINT (Y2,X2)
+  IF TESTER = 4 THEN
+   X = X - MOVMENT
+   Y8 = Y+8
+   X8 = X+8
+   Y9 = Y+9
+   Y17 = Y+17
+  ENDIF
+  NEXT X2
+  NEXT Y2
+  Y8 = Y+8
+  X8 = X+8
+  Y9 = Y+9
+  Y17 = Y+17
+  E = 0
+  FOR ROW = Y TO Y8
+  FOR COL = X TO X8
+  IF HEAD(E) <> 0 THEN
+   PSET (ROW,COL),HEAD(E)
+  ENDIF
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+ IF MANSPOS = 0 THEN
+  E = 0
+  FOR ROW = Y9 TO Y17
+  FOR COL = X TO X8
+  IF WALK(E) <> 0 THEN
+   PSET (ROW,COL),WALK(E)
+  ENDIF
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  MANSPOS = 1
+ ELSE
+  E = 0
+  FOR ROW = Y9 TO Y17
+  FOR COL = X TO X8
+  IF STND(E) <> 0 THEN
+   PSET (ROW,COL),STND(E)
+  ENDIF
+   E = E + 1
+  NEXT COL
+  NEXT ROW
+  MANSPOS = 0
+ ENDIF 
+ENDIF
+IF I$ = " " THEN
+ IF ROPE = 0 THEN
+  IF JUMP = 0 THEN
+   MOVMENT = 2
+   RD = DIREC
+   IF RD = 1 THEN
+    RX = X
+    ENDRX = RX + 40
+   ELSE
+    RX = X + 4
+    ENDRX = RX - 40
+   ENDIF
+   ORIGRX = RX
+   RY = Y+13
+   ROPE = 1
+   IF ENDRX > 320 THEN
+    ROPE = 0
+   ENDIF
+   IF ENDRX < 0 THEN
+    ROPE = 0
+   ENDIF
+  ENDIF
+ ENDIF
+ENDIF
+IF I$ = "P" THEN
+ LOCATE 22,7
+ PRINT "                         "
+ LOCATE 22,7
+ COLOR 9,0
+ PRINT " PAUSE - ";
+ COLOR 15,0
+ PRINT "SCORE";
+ PRINT PTS
+ I$ = ""
+ WHILE (I$="")
+ I$ = INKEY$
+ WEND
+ I$ = ""
+ LOCATE 22,7
+ PRINT "                        "
+ENDIF
+RETURN

@@ -1,0 +1,21 @@
+CLS
+A$ = COMMAND$
+A$ = LTRIM$(A$)
+SCREEN 13
+OPEN "I",1,A$
+WHILE (ERROR < 1)
+INPUT# 1, R
+INPUT# 1, C
+INPUT# 1, CLR
+PSET (R,C),CLR
+WEND
+CLOSE 1
+LOCATE 23,0
+PRINT "                                 "
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+SCREEN 0
+WIDTH 80
+CLS
+END

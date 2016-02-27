@@ -1,0 +1,83 @@
+CLS
+COLOR 14,0
+PRINT "         Õ"
+PRINT "   ÜÛÛÛÛÛÛÛÛÛÛÛ"
+PRINT " ÜÛÛÛÛÛÛÛÛÛÛÛÛÛ"
+LOCATE 0,10
+COLOR 4,0
+PRINT "======================================================================"
+LOCATE 1,15
+COLOR 3,0
+PRINT "ÛÛÛÛÜ"
+LOCATE 2,15
+PRINT "ÛÛÛÛÛÛÜ"
+LOCATE 1,9
+COLOR 14,4
+PRINT "Ý Þ" 
+LOCATE 2,9
+PRINT "  " 
+LOCATE 1,5
+PRINT "Ý Þ" 
+LOCATE 2,5
+PRINT "  " 
+LOCATE 3,0
+COLOR 1,0
+PRINT "ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÜ"
+PRINT "ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÜ"
+LOCATE 1,16
+COLOR 15,3
+PRINT "Ú"
+LOCATE 1,25
+COLOR 2,0
+PRINT "ÛÛ ÛÛ  ÛÛ  ÛÛ  ÛÛ ÛÛÛÛ ÛÛÛÜ  ÛÛ  ÛÛÛÜ   ÛÛ   ÛÛÛÛ ÛÛÛÛ"
+LOCATE 2,25
+COLOR 10,0
+PRINT "ÛÛ ÛÛ ÞÝÞÝ ÛÛ  ÛÛ Û    Û  ÞÝÞÝÞÝ Û  ÞÝ ÞÝÞÝ  Û     Û Û"
+LOCATE 3,25
+COLOR 15,0
+PRINT "ÛÛÛÛÛ Û  Û ÛÛ  ÛÛ ÛÛÛ  ÛÛÛß Û    ÛÛÛß  Û  Û  ÛÛ    Û"
+LOCATE 4,25
+COLOR 10,0
+PRINT "ÛÛ ÛÛ ÞÝÞÝ ÞÛÝÞÛÝ Û    ÛßÜ  ÞÝÞÝ ÛßÜ  ÞÛÛÛÞÝ Û     Û"
+LOCATE 5,25
+COLOR 2,0
+PRINT "ÛÛ ÛÛ  ÛÛ   ÛÛÛÛ  ÛÛÛÛ Û  Û  ÛÛ  Û  Û Û    Û Û     Û"
+COLOR 4,0
+LOCATE 6,59
+PRINT ""; 
+COLOR 9,0
+PRINT " A  -  2  2  5  X";
+COLOR 4,0
+PRINT " " 
+LOCATE 7,0
+COLOR 0,7
+PRINT "| To: A-225X flight instructors                                             |"
+PRINT "|                                                                           |"
+PRINT "| Re: Red Alert!                                                            |"
+PRINT "| ========================================================================= |"
+PRINT "|     WE KNOW THERE HAS NOT BEEN ENOUGH TIME TO FULLY TRAIN ONE STUDENT,    |"
+PRINT "| BUT WE NEED YOUR BEST PILOT!  THERE HAVE BEEN SEVERAL ATTACKS ON SOME     |"
+PRINT "| OF OUR TERRITORIES!  ATTACK PROBES, SMALL UNMANNED PROGRAMMED CRAFT, ARE  |"
+PRINT "| BEING SENT TO DESTROY OUR BASES!  WE NEED TO DEFEND WITH THE A-225X!      |"
+PRINT "|                                                                           |"
+PRINT "|                                                                           |"
+COLOR 7,6
+PRINT "°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+PRINT "°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+PRINT "°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+PRINT "°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+COLOR 15,0
+PRINT "ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ"
+LOCATE 23,0
+COLOR 15,0
+PRINT "HOVERCRAFT A-225X by DYLAN WOLF"
+FOR T = 1 TO 2
+I$ = INKEY$
+IF I$ > "" THEN GETOUT:
+IF I$ < "" THEN GETOUT:
+T = 1
+NEXT T
+
+GETOUT:
+CLS
+END

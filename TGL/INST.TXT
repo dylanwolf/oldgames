@@ -1,0 +1,43 @@
+Instructions
+                     W O L F W A R E    P R E S E N T S . . .
+ððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððð
+
+  ÛÛÛÛ THE                  Û    
+ ÛÛ Üß                      ÛßßßÜ
+ÛÛ   ßß                     Û    
+ÛÛ  ÛÛ  ÛÜßÜ ÜßßßÜ ÜÛßßÛ    Û    
+ ÛÛ  Û  Û Üß Ûßßß    ÜßßÜ   Û  ßÜ
+  ÛÛÛÛ  Û     ßÜÜß   ßÜßßßÜ ßÜÜß 
+
+           ÜßßÜßÜ           ÜßßÜ  Ü            Ü           Û    ÜßÜßÜ
+             ÞÛ               Û ßß            ßÜ           ÛßßßÜ ÞÝ
+             ÛÛ              ÞÝ                            Û     Û
+             ÛÛ  Ü  ÜÛßßÛ    ÛßßÜ ßÜ  ÜßÜ ÛÜßÜ Û   ÛÜßßÛ   Û     ÛÜßßÛ
+             ÛÛ ß Û   ÜßßÜ   Û   Û Û  Û   Û Üß Û   Û   Û   Û  ßÜ Û   Û
+             ÛÛÛÛÛÛ   ßÜßßßÜ ÛÜÜß   ßÜß   Û    ßÜß Û   ßÜß ßÜÜß  Û   ßÜß
+                                  ÜÜ Û  BY DYLAN WOLF
+                                  ÛÜßÜ
+
+ððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððððð
+ 
+ 
+ : Move - There are doors to move through. (press in direction of door)
+    T: Take - If you see a treasure chest, use this to collect what's inside.
+    C: Coordinates - A coordinate system for the palace is shown.  You begin 
+       at (3,1).  The palace's dimensions are from (1,1) to (5,10).
+  ESC: Quit - exit the game
+
+  Control-S: Save game
+  Control-L: Load game
+
+ * During battles, a flashing  will be in the window telling you to hit any
+   key to go on.  During movement, a flashing ? will be in the window asking
+   you for an input.
+
+----------------------------------------------------------------------------
+                                 NOTE:
+YOU MAY BYPASS THE TITLE SCREEN AND MENU AND GO ON TO THE GAME BY ENTERING
+                                 MAZE
+AT THE DOS PROMPT INSTEAD OF
+                                 GO
+----------------------------------------------------------------------------

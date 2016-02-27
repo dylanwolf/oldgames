@@ -1,0 +1,185 @@
+CLS
+COLOR 14,0
+LOCATE 17,5
+PRINT "  P       R       E       S       E       N       T       S  "
+WHILE (I$ = "")
+I$ = INKEY$
+FOR CLRLOOP = 9 TO 15
+COLOR CLRLOOP,8
+LOCATE 14,5
+PRINT "SOFTWARE"
+COLOR CLRLOOP,0
+LOCATE 5,5
+PRINT "АА       АА                   АА       АА"
+LOCATE 6,5
+PRINT "АА       АА                   АА       АА"
+LOCATE 7,5
+PRINT "ББ       ББ                   ББ       ББ"
+LOCATE 8,5
+PRINT "ББ       ББ                   ББ       ББ"
+LOCATE 9,5
+PRINT "ВВ   В   ВВ   ВВВ   ВВ   ВВВВ ВВ   В   ВВ    ВВ    ВВВВ  ВВВВ"
+LOCATE 10,5
+PRINT "ВВ  ВВВ  ВВ  ВВ ВВ  ВВ   ВВ   ВВ  ВВВ  ВВ   ВВВВ   ВВ ВВ ВВ"
+LOCATE 11,5
+PRINT "лл ллллл лл лл   лл лл   лллл лл ллллл лл  лл  лл  лллл  лллл"
+LOCATE 12,5
+PRINT "ллллл ллллл  лл лл  лл   лл   ллллл ллллл лллллллл лл лл лл"
+LOCATE 13,5
+PRINT "лллл   лллл   ллл   лллл лл   лллл   лллл лл    лл лл олнлллл" 
+START& = TIMER
+TIMES& = 0
+WHILE (TIMES& < 5)
+I$ = INKEY$
+IF I$ <> "" THEN STOPFLASH:
+NOW& = TIMER
+TIMES& = NOW& - START&
+TIMES& = ABS(TIMES&)
+WEND
+NEXT CLRLOOP
+WEND
+STOPFLASH:
+I$ = ""
+CLS
+STARTOVER:
+CLS
+FLS$ = SPACE$(79)
+FOR ROW = 0 TO 23
+LOCATE ROW,0
+COLOR 15,1
+PRINT FLS$
+NEXT ROW
+locate 0,0
+COLOR 14,4
+PRINT "WOLFWARE"
+COLOR 9,4
+PRINT "    ллллл      лл    ллл     ллл  лллллл     лллллл     лл      ллллл  лл  лл  "
+PRINT "   лл   лл    лллл   лллл   лллл  лл         лл   лл   лллл    лл   лл лл  лл  "
+PRINT "  лл         лл  лл  ллллл ллллл  лл         лл   лл  лл  лл  лл       лл лл   "
+PRINT "  лл        лл    лл лл ллллл лл  лллл       лл   лл лл    лл лл       лллл    "
+PRINT "  лл   ллл  лллллллл лл  ллл  лл  лл         лллллл  лллллллл лл       лл лл   "
+PRINT "   лл   лл  лл    лл лл   л   лл  лл         лл      лл    лл  лл   лл лл  лл  "
+PRINT "    ллллл   лл    лл лл       лл  лллллл     лл      лл    лл   ллллл  лл  лл  "
+COLOR 14,4
+PRINT "by Dylan Wolf"
+PRINT ""
+PRINT ""
+PRINT ""
+COLOR 15,1
+PRINT "  Hovercraft A-225X"
+PRINT "  Bounce Paddles"
+PRINT "  Wolfware Slots"
+PRINT "  ФФФФФФФФФФФФФФФФФФ"
+PRINT "  Read Documentation"
+PRINT "  Exit"
+Y = 12
+LOCATE Y,0
+COLOR 14,1
+PRINT ""
+XYZ$ = CHR$(0)
+ETR$=CHR$(13)
+UP$ = XYZ$+"H"
+DN$ = XYZ$+"P"
+WHILE (I$ <> "")
+I$ = INKEY$
+LOCATE 23,79
+IF I$ = UP$ THEN
+LOCATE Y,0
+COLOR 1,1
+PRINT ""
+Y = Y - 1
+DIR = -1
+LOCATE Y,0
+COLOR 14,1
+PRINT ""
+ENDIF
+IF I$ = DN$ THEN
+LOCATE Y,0
+COLOR 1,1
+PRINT ""
+Y = Y + 1
+DIR = 1
+LOCATE Y,0
+COLOR 14,1
+PRINT ""
+ENDIF
+IF Y = 15 THEN
+LOCATE Y,0
+COLOR 1,1
+PRINT ""
+Y = Y + DIR
+LOCATE Y,0
+COLOR 14,1
+PRINT ""
+ENDIF
+IF Y = 11 THEN
+LOCATE Y,0
+COLOR 1,1
+PRINT ""
+Y = 12
+LOCATE Y,0
+COLOR 14,1
+PRINT ""
+ENDIF
+IF Y = 18 THEN
+LOCATE Y,0
+COLOR 1,1
+PRINT ""
+Y = 17
+LOCATE Y,0
+COLOR 14,1
+PRINT ""
+ENDIF
+IF I$ = ETR$ THEN
+ IF Y = 12 THEN
+  RUN "TITLE.COM"
+  A$ = "TITLE.COM"
+  IF ERROR > 0 THEN ERRORHANDLE:
+  CALL ("TEXTVIEW.COM"," CONTROL")
+  A$ = "TEXTVIEW.COM  or  CONTROL.TXT"
+  IF ERROR > 0 THEN ERRORHANDLE:
+  RUN "STORY.COM"
+  A$ = "STORY.COM"
+  IF ERROR > 0 THEN ERRORHANDLE:
+  RUN "HOVER.COM"
+  A$ = "HOVER.COM"
+  IF ERROR > 0 THEN ERRORHANDLE:
+ ENDIF
+ IF Y = 13 THEN
+  CALL ("FSPIC.COM", " TITLE.BP")
+  A$ = "FSPIC.COM  or  TITLE.BP"
+  IF ERROR > 0 THEN ERRORHANDLE:
+  RUN "BPADDLE.COM"
+  A$ = "BPADDLE.COM"
+  IF ERROR > 0 THEN ERRORHANDLE:
+ ENDIF
+ IF Y = 14 THEN
+  RUN "SLOTS.COM"
+  A$ = "SLOTS.COM"
+  IF ERROR > 0 THEN ERRORHANDLE:
+ ENDIF
+ IF Y = 16 THEN
+  CALL ("TEXTVIEW.COM"," GAMEPACK")
+  A$ = "TEXTVIEW.COM  or  GAMEPACK.TXT"
+  IF ERROR > 0 THEN ERRORHANDLE:
+ ENDIF
+ IF Y = 17 THEN
+  I$ = ""
+ ENDIF
+ GOTO STARTOVER:
+ENDIF
+WEND
+CLS
+END
+
+ERRORHANDLE:
+CLS
+COLOR 15,0
+PRINT "File not found."
+PRINT "Check to see if a file is missing:"
+PRINT A$
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+GOTO STARTOVER:
