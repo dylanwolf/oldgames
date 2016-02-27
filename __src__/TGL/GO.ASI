@@ -1,0 +1,225 @@
+CLS
+COLOR 14,0
+LOCATE 17,5
+PRINT "  P       R       E       S       E       N       T       S  "
+WHILE (I$ = "")
+I$ = INKEY$
+FOR CLRLOOP = 9 TO 15
+COLOR CLRLOOP,8
+LOCATE 14,5
+PRINT "SOFTWARE"
+COLOR CLRLOOP,0
+LOCATE 5,5
+PRINT "∞∞       ∞∞                   ∞∞       ∞∞"
+LOCATE 6,5
+PRINT "∞∞       ∞∞                   ∞∞       ∞∞"
+LOCATE 7,5
+PRINT "±±       ±±                   ±±       ±±"
+LOCATE 8,5
+PRINT "±±       ±±                   ±±       ±±"
+LOCATE 9,5
+PRINT "≤≤   ≤   ≤≤   ≤≤≤   ≤≤   ≤≤≤≤ ≤≤   ≤   ≤≤    ≤≤    ≤≤≤≤  ≤≤≤≤"
+LOCATE 10,5
+PRINT "≤≤  ≤≤≤  ≤≤  ≤≤ ≤≤  ≤≤   ≤≤   ≤≤  ≤≤≤  ≤≤   ≤≤≤≤   ≤≤ ≤≤ ≤≤"
+LOCATE 11,5
+PRINT "€€ €€€€€ €€ €€   €€ €€   €€€€ €€ €€€€€ €€  €€  €€  €€€€  €€€€"
+LOCATE 12,5
+PRINT "€€€€€ €€€€€  €€ €€  €€   €€   €€€€€ €€€€€ €€€€€€€€ €€ €€ €€"
+LOCATE 13,5
+PRINT "€€€€   €€€€   €€€   €€€€ €€   €€€€   €€€€ €€    €€ €€ ﬁ€›€€€€" 
+START& = TIMER
+TIMES& = 0
+WHILE (TIMES& < 5)
+I$ = INKEY$
+IF I$ <> "" THEN STOPFLASH:
+NOW& = TIMER
+TIMES& = NOW& - START&
+TIMES& = ABS(TIMES&)
+WEND
+NEXT CLRLOOP
+WEND
+STOPFLASH:
+I$ = ""
+CLS
+SCREEN 13
+R = 200
+C = 320
+RANDOMIZE
+FOR ROW = 0 TO 200
+FOR COL = 0 TO 320
+U = RND(5)
+PSET (R,C),U
+C = C - 1
+NEXT COL
+C = 320
+R = R - 1
+NEXT ROW
+LOCATE 24,0
+COLOR 15,0
+PRINT "by Dylan Wolf"
+CALL ("FSP2.COM", " TITLE.GLP")
+GOTO STARTNORM:
+REDO:
+SCREEN 13
+R = 200
+C = 320
+RANDOMIZE
+FOR ROW = 0 TO 200
+FOR COL = 0 TO 320
+U = RND(5)
+PSET (R,C),U
+C = C - 1
+NEXT COL
+C = 320
+R = R - 1
+NEXT ROW
+COLOR 15,0
+LOCATE 1,21
+PRINT "The Great Labyrinth"
+LOCATE 24,0
+PRINT "by Dylan Wolf"
+STARTNORM:
+Y = 8
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+I$ = ""
+FOR COL = 10 TO 28
+COLOR 1,0
+LOCATE 3,COL
+PRINT "€"
+COLOR 3,0
+LOCATE 20,COL
+PRINT "€"
+COL = COL + 1
+IF COL < 29 THEN
+COLOR 3,0
+LOCATE 3,COL
+PRINT "€"
+COLOR 1,0
+LOCATE 20,COL
+PRINT "€"
+ENDIF
+NEXT COL
+FOR ROW = 4 TO 18
+COLOR 3,0
+LOCATE ROW,10
+PRINT "€"
+LOCATE ROW,28
+PRINT "€"
+ROW = ROW + 1
+COLOR 1,0
+LOCATE ROW,10
+PRINT "€"
+LOCATE ROW,28
+PRINT "€"
+NEXT ROW
+COLOR 0,0
+FOR COL = 11 TO 29
+LOCATE 21,COL
+PRINT "€"
+NEXT COL
+FOR ROW = 4 TO 20
+LOCATE ROW,29
+PRINT "€"
+NEXT ROW
+FOR ROW = 4 TO 19
+FOR COL = 11 TO 27
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+LOCATE 5,14
+COLOR 15,0
+PRINT "Main Menu"
+COLOR 9,0
+LOCATE 8,14
+PRINT "Start Game"
+COLOR 13,0
+LOCATE 10,14
+PRINT "Documentation"
+COLOR 12,0
+LOCATE 11,14
+PRINT "Story"
+COLOR 14,0
+LOCATE 12,14
+PRINT "Instructions"
+COLOR 10,0
+LOCATE 14,14
+PRINT "End"
+LOCATE 23,0
+XYZ$ = CHR$(0)
+UP$ = XYZ$ + "H"
+DN$ = XYZ$ + "P"
+ETR$ = CHR$(13)
+WHILE (ENDMEN = 0)
+I$ = INKEY$
+IF I$ = UP$ THEN
+MOVY = -1
+LOCATE Y,13
+PRINT " "
+Y = Y - 1
+ENDIF
+IF I$ = DN$ THEN
+MOVY = 1
+LOCATE Y,13
+PRINT " "
+Y = Y + 1
+ENDIF
+IF I$ = ETR$ THEN
+IF Y = 8 THEN
+SCREEN 0
+RUN "MAZE.EXE"
+GOTO REDO:
+ENDIF
+IF Y = 10 THEN
+SCREEN 0
+CALL ("TEXTVIEW.COM", " README")
+GOTO REDO:
+ENDIF
+IF Y = 11 THEN
+SCREEN 0
+CALL ("TEXTVIEW.COM", " STORY")
+GOTO REDO:
+ENDIF
+IF Y = 12 THEN
+SCREEN 0
+CALL ("TEXTVIEW.COM", " INST")
+GOTO REDO:
+ENDIF
+IF Y = 14 THEN
+CLS
+SCREEN 0
+END
+ENDIF
+ENDIF
+IF Y = 7 THEN
+Y = 8
+ENDIF
+IF Y = 9 THEN
+Y = Y + MOVY
+ENDIF
+IF Y = 13 THEN
+Y = Y + MOVY
+ENDIF
+IF Y = 15 THEN
+Y = 14
+ENDIF
+Y2 = Y * 8
+PSET (Y2,110),7
+Y2 = Y2 + 1
+PSET (Y2,109),7
+Y2 = Y2 + 1
+PSET (Y2,108),7
+Y2 = Y2 + 1
+PSET (Y2,107),7
+PSET (Y2,105),8
+Y2 = Y2 + 1
+PSET (Y2,106),8
+Y2 = Y2 + 1
+PSET (Y2,105),8
+PSET (Y2,107),8
+Y2 = Y2 + 1
+PSET (Y2,104),8
+WEND

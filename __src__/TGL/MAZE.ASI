@@ -1,0 +1,1662 @@
+DIM RMT$(50)
+DIM TKN(8)
+CLS
+ROOM = 1
+OPEN "I",1,"MAZE1.DAT"
+FOR ROOM = 1 TO 50
+IF ERROR > 0 THEN
+CLS
+PRINT "File not found: MAZE.DAT"
+WHILE (I$="")
+I$ = INKEY$
+WEND
+END
+ENDIF
+LOCATE 0,0
+COLOR 14,0
+PRINT "DIFFICULTY"
+COLOR 15,0
+PRINT "Please use the     +     and     -     keys to change the meter."
+PRINT "This is the difficulty level for the game, so your HP will be based"
+PRINT "on the meter.  The '+' side gives you more health, and the '-' side"
+PRINT "gives you less."
+COLOR 4,0
+LOCATE 7,0
+PRINT "-                                                            +"
+ETR$ = CHR$(13)
+METER = 1
+WHILE (I$ <> ETR$)
+I$ = INKEY$
+IF I$ = "-" THEN
+IF METER > 1 THEN
+METER = METER - 1
+ENDIF
+ENDIF
+IF I$ = "+" THEN
+IF METER < 6 THEN
+METER = METER + 1
+ENDIF
+ENDIF
+COLOR 15,0
+LOCATE 7,1
+HP = 20 * METER
+METER3 = METER * 10
+BAR$ = STRING$(METER3,"€")
+METER2 = 60 - METER3
+EMPT$ = STRING$(METER2, "∞")
+PRINT BAR$;
+PRINT EMPT$
+WEND
+INPUT# 1, RMT$(ROOM) CRLF
+NEXT ROOM
+CLOSE 1
+RANDOMIZE
+IF HP = 20 THEN
+HP = 50
+ENDIF
+IF HP = 40 THEN
+HP = 65
+ENDIF
+IF HP = 60 THEN
+HP = 75
+ENDIF
+X = 3
+Y = 1
+RM = 3
+LBP$ = "H"
+A = 1
+D = 1
+SWD$ = "Sword"
+ARM$ = "Clothes"
+REDO:
+TRES = 0
+IF RMT$(RM) = "11" THEN
+TD = 1
+BD = 0
+LD = 0
+RD = 0
+ENDIF
+IF RMT$(RM) = "12" THEN
+TD = 0
+BD = 0
+LD = 1
+RD = 0
+ENDIF
+IF RMT$(RM) = "13" THEN
+TD = 0
+BD = 1
+LD = 0
+RD = 0
+ENDIF
+IF RMT$(RM) = "14" THEN
+TD = 0
+BD = 0
+LD = 0
+RD = 1
+ENDIF
+IF RMT$(RM) = "0" THEN
+TD = 1
+BD = 1
+LD = 0
+RD = 0
+ENDIF
+IF RMT$(RM) = "1" THEN
+TD = 1
+BD = 1
+LD = 1
+RD = 1
+ENDIF
+IF RMT$(RM) = "2" THEN
+TD = 1
+BD = 1
+LD = 1
+RD = 0
+ENDIF
+IF RMT$(RM) = "3" THEN
+TD = 1
+BD = 1
+LD = 0
+RD = 1
+ENDIF
+IF RMT$(RM) = "4" THEN
+TD = 1
+BD = 0
+LD = 1
+RD = 1
+ENDIF
+IF RMT$(RM) = "5" THEN
+TD = 0
+BD = 1
+LD = 1
+RD = 1
+ENDIF
+IF RMT$(RM) = "6" THEN
+TD = 0
+BD = 1
+LD = 1
+RD = 0
+ENDIF
+IF RMT$(RM) = "7" THEN
+TD = 0
+BD = 1
+LD = 0
+RD = 1
+ENDIF
+IF RMT$(RM) = "8" THEN
+TD = 1
+BD = 0
+LD = 1
+RD = 0
+ENDIF
+IF RMT$(RM) = "9" THEN
+TD = 1
+BD = 0
+LD = 0
+RD = 1
+ENDIF
+IF RMT$(RM) = "10" THEN
+TD = 0
+BD = 0
+LD = 1
+RD = 1
+ENDIF
+GOTO CHKROOM:
+STOPCHK:
+CLS
+COLOR 9,0
+PRINT "…ÕÕÕÕÕÕÕÕÕπ ÃÕÕÕÕÕÕÕÕÕª"
+PRINT "∫                     ∫"
+PRINT "∫                     ∫"
+PRINT "∫                     ∫"
+PRINT "∫                     ∫"
+PRINT "                       "
+PRINT ""
+PRINT "À                     À"
+PRINT "∫                     ∫"
+PRINT "∫                     ∫"
+PRINT "∫                     ∫"
+PRINT "∫                     ∫"
+PRINT "»ÕÕÕÕÕÕÕÕÕπ ÃÕÕÕÕÕÕÕÕÕº"
+GOSUB BRICKFLOOR:
+LOCATE 0,24
+COLOR 14,0
+PRINT "Your character:"
+LOCATE 1, 27
+COLOR 4,0
+PRINT "";
+PRINT HP;
+PRINT "         "
+LOCATE 2, 28
+COLOR 2,0
+PRINT "A";
+PRINT A
+LOCATE 3, 29
+COLOR 9,0
+PRINT "D";
+PRINT D
+LOCATE 4, 30
+COLOR 15,0
+PRINT "Weapon: ";
+PRINT SWD$;
+PRINT "         "
+LOCATE 5, 31
+PRINT "Armor: ";
+PRINT ARM$;
+PRINT "         "
+LOCATE 6, 32
+PRINT "Keys: ";
+IF KEY1 = 1 THEN
+PRINT "Key #1  ";
+ENDIF
+IF KEY2 = 1 THEN
+PRINT "Key #2  ";
+ENDIF
+PRINT ""
+IF COMP = 1 THEN
+LOCATE 7, 33
+COLOR 15,0
+PRINT "Coordinates on.  Location in maze is:"
+LOCATE 8,33
+PRINT X;
+PRINT " ,";
+PRINT Y;
+ENDIF
+LOCATE 14,0
+COLOR 14, 0
+TOPS$ = STRING$(76,"ƒ")
+PRINT "⁄";
+PRINT TOPS$;
+PRINT "ø"
+ES$ = SPACE$(76)
+EMPTY$ = "≥"+ES$
+EMPTY$ = EMPTY$+"≥"
+PRINT EMPTY$
+PRINT EMPTY$
+PRINT EMPTY$
+PRINT EMPTY$
+PRINT EMPTY$
+PRINT EMPTY$
+PRINT "¿";
+PRINT TOPS$;
+PRINT "Ÿ"
+COLOR 9,0
+IF TD = 0 THEN
+LOCATE 0,10
+PRINT "ÕÕÕ"
+ENDIF
+IF LD = 0 THEN
+LOCATE 5,0
+PRINT "∫"
+PRINT "∫"
+PRINT "∫"
+ENDIF
+IF RD = 0 THEN
+LOCATE 5, 22
+PRINT "∫"
+LOCATE 6, 22
+PRINT "∫"
+LOCATE 7, 22
+PRINT "∫"
+ENDIF
+IF BD = 0 THEN
+LOCATE 12,10
+PRINT "ÕÕÕ"
+ENDIF
+IF KEY1 = 0 THEN
+IF X = 5 THEN
+IF Y = 2 THEN
+LOCATE 12,10
+PRINT "π€Ã"
+ENDIF
+ENDIF
+ENDIF
+IF KEY2 = 0 THEN
+IF X = 5 THEN
+IF Y = 8 THEN
+LOCATE 5, 0
+PRINT " "
+LOCATE 6, 0
+PRINT "€"
+LOCATE 7, 0
+PRINT "À"
+ENDIF
+ENDIF
+ENDIF
+COLOR 14,1
+IF LBP$ = "H" THEN
+LOCATE 11,11
+PRINT ""
+ENDIF
+IF LBP$ = "P" THEN
+LOCATE 1,11
+PRINT ""
+ENDIF
+IF LBP$ = "M" THEN
+LOCATE 6,1
+PRINT ""
+ENDIF
+IF LBP$ = "K" THEN
+LOCATE 6,21
+PRINT ""
+ENDIF
+IF TAKTRES = 1 THEN STOPBATT:
+IF TRES > 0 THEN
+IF TRES < 100 THEN
+LOCATE 3,3
+COLOR 12,9
+PRINT "˛"
+ENDIF
+ENDIF
+IF TRES = 100 THEN
+LOCATE 3,3
+COLOR 4,1
+PRINT "˛"
+ENDIF
+G23 = 0
+G = 0
+G23 = RND(2)
+G = G23 / 2340
+IF MNST > 0 THEN BATTLE:
+MONST$ = ""
+IF G = 2 THEN
+MONST$ = "Snake"
+MAD$ = "The snake lunges at you and bites!"
+MA = 3
+MD = 1
+MHP = 5
+ENC = 2
+ECH$ = "ı"
+ENDIF
+IF G = 9 THEN
+IF Y > 6 THEN
+MONST$ = "Scorpion"
+MAD$ = "You are hit by the scorpion's sharp tail!"
+MA = 3
+MD = 2
+MHP = 35
+ENC = 2
+ECH$ = "Õæ"
+ENDIF
+ENDIF
+IF G = 3 THEN
+MONST$ = "Vampire Bat"
+MAD$ = "The bat swoops at you!"
+MA = 2
+MD = 2
+MHP = 5
+ENC = 8
+ECH$ = "¿Ÿ"
+ENDIF
+IF G = 6 THEN
+MONST$ = "Ghost"
+MAD$ = "Your health diminishes with the ghost's touch!"
+MA = 3
+MD = 1
+MHP = 10
+ENC = 15
+ECH$ = ""
+ENDIF
+IF G = 4 THEN
+MONST$ = "Specter"
+MAD$ = "You feel a cold hand on your shoulder..."
+IF Y > 3 THEN
+MA = 2
+MD = 2
+MHP = 12
+ELSE
+MA = 2
+MD = 1
+MHP = 5
+ENDIF
+ENC = 14
+ECH$ = ""
+ENDIF
+IF G = 7 THEN
+MONST$ = "Lizard"
+MAD$ = "The lizard claws at you!"
+MA = 1
+MD = 1
+MHP = 15
+ENC = 2
+ECH$ = "©"
+ENDIF
+IF MONST$ <> "" THEN BATTLE:
+STOPBATT:
+LOCATE 0,24
+COLOR 14,0
+PRINT "Your character:"
+LOCATE 1, 27
+COLOR 4,0
+PRINT "";
+PRINT HP;
+PRINT "         "
+LOCATE 2, 28
+COLOR 2,0
+PRINT "A";
+PRINT A
+LOCATE 3, 29
+COLOR 9,0
+PRINT "D";
+PRINT D
+LOCATE 4, 30
+COLOR 15,0
+PRINT "Weapon: ";
+PRINT SWD$;
+PRINT "         "
+LOCATE 5, 31
+PRINT "Armor: ";
+PRINT ARM$;
+PRINT "         "
+COLOR 15,0
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+I$ = ""
+XYZ$ = CHR$(0)
+F1$ = XYZ$ + ";"
+UP$ = XYZ$ + "H"
+DN$ = XYZ$ + "P"
+LT$ = XYZ$ + "K"
+RT$ = XYZ$ + "M"
+IF RM = 3 THEN
+LOCATE 15,1
+COLOR 15,0
+PRINT "Welcome to the Great Labyrinth - - - A role playing game by Dylan Wolf"
+LOCATE 16,1
+COLOR 7,0
+PRINT "HIT   F1   FOR HELP"
+COLOR 12,0
+LOCATE 18,1
+PRINT "Open chests to find weapons, armor, food... or enemies!"
+LOCATE 19,1
+COLOR 9,0
+PRINT "Collect weapons and armor to destroy monsters!"
+LOCATE 20,1
+COLOR 10,0
+PRINT "Collect keys to open new passages!"
+ENDIF
+IF TRES > 0 THEN
+IF TRES < 100 THEN
+LOCATE 15,1
+COLOR 15,0
+PRINT "There is a treasure chest here!"
+LOCATE 16,1
+PRINT "Press <";
+COLOR 9,8
+PRINT "T";
+COLOR 15,0
+PRINT "> to take its contents."
+LOCATE 3,3
+COLOR 12,9
+PRINT "˛"
+ENDIF
+ENDIF
+IF TRES = 100 THEN
+LOCATE 3,3
+COLOR 4,1
+PRINT "˛"
+ENDIF
+CTRLL$ = CHR$(12)
+WHILE (DEAD = 0)
+LOCATE 20,74
+COLOR 15,8
+PRINT "?"
+I$ = INKEY$
+I$ = UCASE$(I$)
+IF I$ = CTRLL$ THEN
+SAVEFIL$ = ""
+BS$ = CHR$(8)
+ETR$ = CHR$(13)
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+LOCATE 15,1
+COLOR 15,0
+PRINT "Open file name:"
+ORIGINPT2: IN$ = ""
+LOCATE 16,1
+PRINT SAVEFIL$;
+PRINT "                 "
+WHILE (IN$ = "")
+IN$ = INKEY$
+WEND
+LENGTHA = LEN(SAVEFIL$)
+LENGTHB = LENGTHA - 1
+IF IN$ = BS$ THEN
+SAVEFIL$ = LEFT$(SAVEFIL$,LENGTHB)
+GOTO ORIGINPT2:
+ENDIF
+IF IN$ = ETR$ THEN DONESAVETYPE2:
+IF LENGTHA < 8 THEN
+IF IN$ <> " " THEN
+SAVEFIL$ = SAVEFIL$ + IN$
+ENDIF
+ENDIF
+GOTO ORIGINPT2:
+DONESAVETYPE2:
+SAVEFIL$ = SAVEFIL$ + ".GLG"
+OPEN "I",3,SAVEFIL$
+IF ERROR > 0 THEN
+COLOR 15,0
+LOCATE 17,1
+PRINT "Save file not found."
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+I$ = ""
+LOCATE 17,1
+PRINT "                        "
+GOTO REDO:
+ENDIF
+INPUT# 3, X
+INPUT# 3, Y
+INPUT# 3, A
+INPUT# 3, D
+INPUT# 3, HP
+INPUT# 3, RM
+INPUT# 3, LBP$
+INPUT# 3, SWD$
+INPUT# 3, ARM$
+INPUT# 3, KEY1
+INPUT# 3, KEY2
+INPUT# 3, HELM
+CLOSE 3
+GOTO REDO:
+ENDIF
+IF I$ = "" THEN
+SAVEFIL$ = ""
+BS$ = CHR$(8)
+ETR$ = CHR$(13)
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+LOCATE 15,1
+COLOR 15,0
+PRINT "Save file name:"
+ORIGINPT: IN$ = ""
+LOCATE 16,1
+PRINT SAVEFIL$;
+PRINT "                 "
+WHILE (IN$ = "")
+IN$ = INKEY$
+WEND
+LENGTHA = LEN(SAVEFIL$)
+LENGTHB = LENGTHA - 1
+IF IN$ = BS$ THEN
+SAVEFIL$ = LEFT$(SAVEFIL$,LENGTHB)
+GOTO ORIGINPT2:
+ENDIF
+IF IN$ = ETR$ THEN DONESAVETYPE:
+IF LENGTHA < 8 THEN
+IF IN$ <> " " THEN
+SAVEFIL$ = SAVEFIL$ + IN$
+ENDIF
+ENDIF
+GOTO ORIGINPT:
+DONESAVETYPE:
+SAVEFIL$ = SAVEFIL$ + ".GLG"
+OPEN "O",3,SAVEFIL$
+PRINT# 3, X
+PRINT# 3, Y
+PRINT# 3, A
+PRINT# 3, D
+PRINT# 3, HP
+PRINT# 3, RM
+PRINT# 3, LBP$
+PRINT# 3, SWD$
+PRINT# 3, ARM$
+PRINT# 3, KEY1
+PRINT# 3, KEY2
+PRINT# 3, HELM
+CLOSE 3
+ENDIF
+IF I$ = F1$ THEN
+COLOR 15,0
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+LOCATE 15,1
+PRINT "Keys:"
+COLOR 10,0
+LOCATE 16,2
+LARR$ = CHR$(27)
+RARR$ = CHR$(26)
+UARR$ = CHR$(24)
+DARR$ = CHR$(25)
+ARRS$ = LARR$ + UARR$
+ARRS$ = ARRS$ + DARR$
+ARRS$ = ARRS$ + RARR$
+PRINT ARRS$;
+PRINT ": Move through a door"
+COLOR 14,0
+LOCATE 17,3
+PRINT "T: Take what's in a treasure chest"
+COLOR 9,0
+LOCATE 18,4
+PRINT "C: Coordinates for palace"
+LOCATE 19,5
+COLOR 11,0
+PRINT "Control-S: Save Game/Control-L: Load File"
+COLOR 12,0
+LOCATE 20,6
+PRINT "ESC: Quit game"
+COLOR 15,8
+LOCATE 20, 74
+PRINT ""
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+COLOR 15,0
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+ENDIF
+IF I$ = UP$ THEN
+IF TD = 1 THEN
+TAKTRES = 0
+GOSUB MOVMAN:
+Y = Y + 1
+LBP$ = "H"
+RM = RM + 5
+GOTO REDO:
+ENDIF
+ENDIF
+IF I$ = DN$ THEN
+IF BD = 1 THEN
+TAKTRES = 0
+GOSUB MOVMAN:
+Y = Y - 1
+LBP$ = "P"
+RM = RM - 5
+GOTO REDO:
+ENDIF
+ENDIF
+IF I$ = LT$ THEN
+IF LD = 1 THEN
+TAKTRES = 0
+GOSUB MOVMAN:
+X = X -1
+LBP$ = "K"
+RM = RM - 1
+GOTO REDO:
+ENDIF
+ENDIF
+IF I$ = RT$ THEN
+IF RD = 1 THEN
+TAKTRES = 0
+GOSUB MOVMAN:
+X = X + 1
+LBP$ = "M"
+RM = RM + 1
+GOTO REDO:
+ENDIF
+ENDIF
+IF I$ = "" THEN
+END
+ENDIF
+IF I$ = "T" THEN
+IF TRES > 0 THEN
+TAKTRES = 1
+GOSUB TREASURE:
+ENDIF
+ENDIF
+IF I$ = "C" THEN
+IF COMP = 0 THEN
+COMP = 1
+LOCATE 7, 33
+COLOR 15,0
+PRINT "Coordinates on.  Location in maze is:"
+LOCATE 8,33
+PRINT X;
+PRINT " ,";
+PRINT Y;
+GOTO FINI:
+ENDIF
+IF COMP = 1  THEN
+COMP = 0
+LOCATE 7,33
+COLOR 15,0
+PRINT "                                         "
+LOCATE 8,33
+PRINT "                                         "
+ENDIF
+FINI:
+ENDIF
+WEND
+
+BATTLE:
+IF RM = 3 THEN
+GOTO STOPBATT:
+ENDIF
+IF MNST > 0 THEN
+ IF MNST = 7 THEN
+  MONST$ = "Dragon"
+  MAD$ = "The dragon breathes fire upon you!"
+  MA = 5
+  MD = 4
+  MHP = 50
+  ENC = 10
+  ECH$ = ""
+ ENDIF
+ IF MNST = 6 THEN
+  MONST$ = "Vampire Bat"
+  MAD$ = "The bat swoops at you!"
+  MA = 2
+  MD = 2
+  MHP = 5
+  ENC = 8
+  ECH$ = "¿Ÿ"
+ ENDIF
+ IF MNST = 5 THEN
+  MONST$ = "Warrior"
+  MAD$ = "The warrior draws his sword and delivers a crushing blow!"
+  MA = 2
+  MD = 3
+  MHP = 15
+  ENC = 14
+  ECH$ = ""
+ ENDIF
+ IF MNST = 4 THEN
+  MONST$ = "Ghost"
+  MAD$ = "Your health diminishes with the ghost's touch!"
+  MA = 3
+  MD = 1
+  MHP = 10
+  ENC = 15
+  ECH$ = ""
+ ENDIF
+ IF MNST = 3 THEN
+  MONST$ = "Ghost Knight"
+  MAD$ = "The knight and his horse charge you!"
+  MA = 3
+  MD = 3
+  MHP = 20
+  ENC = 15
+  ECH$ = ""
+ ENDIF
+ IF MNST = 2 THEN
+  MONST$ = "Specter"
+  MAD$ = "The spirit disappears.  You feel a cold hand on your shoulder..."
+  MA = 2
+  MD = 2
+  MHP = 12
+  ENC = 14
+  ECH$ = ""
+ ENDIF
+ IF MNST = 15 THEN
+ MONST$ = "Baby Dragon"
+ MAD$ = "The baby dragon puffs smoke at you!"
+ MA = 1
+ MD = 2
+ MHP = 30
+ ENC = 2
+ ECH$ = ""
+ ENDIF
+ IF MNST = 1 THEN
+  MONST$ = "Lizard"
+  MAD$ = "The lizard claws at you!"
+  MA = 1
+  MD = 1
+  MHP = 15
+  ENC = 2
+  ECH$ = "©"
+ ENDIF
+ENDIF
+LOCATE 6,11
+COLOR ENC,1
+PRINT ECH$
+COLOR 15,0
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+IF WINNER = 1 THEN
+MA = MA + 4
+MD = MD + 2
+MHP = MHP * 2
+ENDIF
+MHP2 = MHP
+LOCATE 15,1
+COLOR 15,0
+PRINT MONST$;
+PRINT " attacks you!"
+LOCATE 20,74
+COLOR 15,8
+PRINT ""
+COLOR 15,0
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+LOCATE 15,1
+PRINT "                                                         "
+WHILE (DEAD = 0)
+G12 = RND(1)
+G1 = G12 / 6687
+G22 = RND(3)
+G2 = G22 / 6687
+DMG2 = A + G1
+DMG = DMG2 - MD
+DTY2 = MA + G2
+DTY = DTY2 - D
+IF DMG <= 0 THEN
+DMG = 0
+GL1 = 0
+ENDIF
+IF DTY <= 0 THEN
+DTY = 0
+ENDIF
+LOCATE 15,1
+IF DMG = 0 THEN
+G1 = 0
+ENDIF
+IF G1 > 0 THEN
+IF G1 = 1 THEN
+PRINT "You jab!";
+SOUND 10000,10
+ENDIF
+IF G1 = 2 THEN
+PRINT "You slash!";
+SOUND 5000,10
+ENDIF
+IF G1 = 3 THEN
+PRINT "You slice!";
+SOUND 1000,10
+ENDIF
+IF G1 = 4 THEN
+PRINT "You stab!";
+SOUND 500,10
+ENDIF
+MHP = MHP - DMG
+PRINT "  Your attack does";
+PRINT DMG;
+PRINT " damage!         "
+ELSE
+PRINT "Your attack misses the monster!           "
+ENDIF
+LOCATE 20,74
+COLOR 15,8
+PRINT ""
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+COLOR 15,0
+LOCATE 16,1
+IF DTY = 0 THEN
+G2 = 0
+ENDIF
+IF G2 > 0 THEN
+SOUND 7500,20
+PRINT MAD$
+HP = HP - DTY
+LOCATE 17,1
+PRINT "The monster's attack does";
+PRINT DTY;
+PRINT " damage!         "
+ELSE
+PRINT "Your armor absorbs the monster's attack!"
+ENDIF
+LOCATE 1, 27
+COLOR 4,0
+PRINT "";
+PRINT HP;
+PRINT "         "
+LOCATE 20,74
+COLOR 15,8
+PRINT ""
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+COLOR 15,0
+LOCATE 18,1
+IF HP <= 0 THEN
+PRINT "You died!"
+LOCATE 20,74
+COLOR 15,8
+PRINT ""
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+GOTO GAMEOVER:
+ENDIF
+IF MHP <= 0 THEN
+IF X = 2 THEN
+IF Y = 7 THEN
+KILLDRAG2 = 1
+ENDIF
+ENDIF
+LOCATE 6,10
+COLOR 0, 1
+PRINT "¬¡¬¡"
+COLOR 15,0
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+LOCATE 15,1
+SOUND 5000,10
+SOUND 15000,10
+SOUND 5000,10
+COLOR 15,0
+PRINT "Thou hast slain the ";
+PRINT MONST$;
+PRINT "!"
+G52 = RND(5)
+G5 = G52 /5461
+LOCATE 16,1
+IF G5 = 2 THEN
+PRINT "It drops food!"
+HP = HP + 5 
+ENDIF
+IF G5 = 3 THEN
+PRINT "It drops a helmet!"
+IF HELM = 0 THEN
+D = D + 1
+HELM = 1
+ARM$ = ARM$ + "  Helmet"
+ENDIF
+ENDIF
+LOCATE 18,1
+PRINT "Your health increases with experience!"
+THI = MHP2 / 2
+HP = HP + THI
+LOCATE 20,74
+COLOR 15,8
+PRINT ""
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+IF MONST$ = "Dragon" THEN
+MAD$ = "The dragon breathes fire upon you!"
+IF X = 4 THEN
+IF Y = 8 THEN
+GOTO SAVEGUY:
+ENDIF
+ENDIF
+ENDIF
+GOTO STOPBATT:
+ENDIF
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+WEND
+TREASURE:
+IF TRES = 10 THEN
+MNST = 0
+MONST$ = "Chest Monster"
+MAD$ = "The chest pounces on top of you!"
+MA = 3
+MD = 2
+MHP = 5
+ENC = 12
+ECH$ = "©˛™"
+LOCATE 3,3
+COLOR 0,1
+PRINT "¬"
+TRES = 0
+TAKTRES = 1
+GOTO BATTLE:
+ENDIF
+IF TRES = 11 THEN
+MNST = 0
+MONST$ = "Genie"
+MAD$ = "The genie fires a magic spell at you!"
+MA = 2
+MD = 1
+MHP = 20
+ENC = 15
+ECH$ = "±∞"
+LOCATE 3,3
+COLOR 0,1
+PRINT "¬"
+TRES = 0
+TAKTRES = 1
+GOTO BATTLE:
+ENDIF
+IF TRES = 12 THEN
+MNST = 0
+LOCATE 18,1
+COLOR 12,0
+PRINT "As you open it, its contents of acid spills onto you."
+TRES = 100
+TAKTRES = 1
+HP = HP - 5
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+LOCATE 15,1
+COLOR 15,0
+PRINT "                                                         "
+LOCATE 1, 27
+COLOR 4,0
+PRINT "";
+PRINT HP;
+PRINT "         "
+GOTO NOTRES:
+ENDIF
+TRES2 = TRES
+IF TRES < 9 THEN
+TKN(TRES) = 1
+ENDIF
+LOCATE 18,1
+COLOR 9,0
+IF TRES2 = 100 THEN
+PRINT "It is empty."
+ENDIF
+IF TRES2 = 9 THEN
+PRINT "Found Food!"
+CHST = 0
+TRES = 0
+HP = HP + 5
+LOCATE 1, 27
+COLOR 4,0
+PRINT "";
+PRINT HP;
+PRINT "         "
+ENDIF
+IF TRES2 = 1 THEN
+KEY2 = 1
+PRINT "Found Key 2"
+ENDIF
+IF TRES2 = 2 THEN
+KEY1 = 1
+PRINT "Found Key 1"
+ENDIF
+IF TRES2 = 3 THEN
+SWD$ = "Excalibur"
+PRINT "Found Excalibur"
+A = 6
+ENDIF
+IF TRES2 = 4 THEN
+ARM$ = "Plate Armor"
+PRINT "Found Plate Armor"
+D = 6
+IF HELM = 1 THEN
+D = D + 1 
+ARM$ = ARM$ + "  Helmet"
+ENDIF
+ENDIF
+IF TRES2 = 5 THEN
+SWD$ = "Sickle"
+PRINT "Found Sickle"
+A = 3
+ENDIF
+IF TRES2 = 6 THEN
+ARM$ = "Plate Mail"
+PRINT "Found Plate Mail"
+D = 3
+IF HELM = 1 THEN
+D = D + 1 
+ARM$ = ARM$ + "  Helmet"
+ENDIF
+ENDIF
+IF TRES2 = 7 THEN
+SWD$ = "Axe"
+PRINT "Found Axe"
+A = 2
+ENDIF
+IF TRES2 = 8 THEN
+ARM$ = "Leather Clothes"
+PRINT "Found Leather Clothes"
+D = 2
+IF HELM = 1 THEN
+D = D + 1 
+ARM$ = ARM$ + "  Helmet"
+ENDIF
+ENDIF
+LOCATE 20,74
+COLOR 15,8
+PRINT ""
+I$ = ""
+WHILE (I$ = "")
+I$ =  INKEY$
+WEND
+LOCATE 1, 27
+COLOR 4,0
+PRINT "";
+PRINT HP;
+PRINT "         "
+LOCATE 2, 28
+COLOR 2,0
+PRINT "A";
+PRINT A
+LOCATE 3, 29
+COLOR 9,0
+PRINT "D";
+PRINT D
+LOCATE 4, 30
+COLOR 15,0
+PRINT "Weapon: ";
+PRINT SWD$;
+PRINT "         "
+LOCATE 5, 31
+PRINT "Armor: ";
+PRINT ARM$;
+PRINT "         "
+LOCATE 6, 32
+PRINT "Keys: ";
+IF KEY1 = 1 THEN
+PRINT "Key #1  ";
+ENDIF
+IF KEY2 = 1 THEN
+PRINT "Key #2  ";
+ENDIF
+NOTRES:
+PRINT ""
+TRES = 100
+COLOR 15,0
+FOR ROW = 15 TO 20
+FOR COL = 1 TO 76
+LOCATE ROW,COL
+PRINT " "
+NEXT COL
+NEXT ROW
+IF TRES = 100 THEN
+LOCATE 3,3
+COLOR 4,1
+PRINT "˛"
+ENDIF
+IF TRES = 100 THEN
+MNST = 0
+TAKTRES = 1
+ENDIF
+RETURN
+
+CHKROOM:
+MNST = 0
+MONST$ = ""
+IF X = 1 THEN
+ IF Y = 1 THEN
+  TRES = 1
+ ENDIF
+ IF Y = 3 THEN
+  MNST = 1
+ ENDIF
+ IF Y = 4 THEN
+  MNST = 4
+ ENDIF
+ IF Y = 5 THEN
+  MNST = 5
+  ENDIF
+ IF Y = 10 THEN
+  TRES = 12
+ ENDIF
+ IF Y = 9 THEN
+  MNST = 15
+ ENDIF
+ IF Y = 8 THEN
+  TRES = 10
+ ENDIF
+ENDIF
+IF X = 2 THEN
+ IF Y = 1 THEN
+  MNST = 6
+ ENDIF
+ IF Y = 4 THEN
+  MNST = 1
+ ENDIF
+ IF Y = 5 THEN
+  TRES = 6
+ ENDIF
+ IF Y = 6 THEN
+  TRES = 10
+ ENDIF
+ IF Y = 7 THEN
+ IF KILLDRAG2 = 0 THEN
+  MNST = 7
+ ENDIF
+ ENDIF
+ IF Y = 8 THEN
+  TRES = 3
+ ENDIF
+ IF Y = 9 THEN ENDROOM:
+ IF Y = 10 THEN
+  MNST = 1
+ ENDIF
+ENDIF
+IF X = 3 THEN
+ IF Y = 2 THEN
+  TRES = 8
+ ENDIF
+ IF Y = 8 THEN
+  TRES = 4
+ ENDIF
+ IF Y = 6 THEN
+  TRES = 11
+ ENDIF
+ IF Y = 10 THEN
+  MNST = 4
+ ENDIF
+ENDIF
+IF X = 4 THEN
+ IF Y = 4 THEN
+  MNST = 1
+  TRES = 2
+ ENDIF
+ IF Y = 5 THEN
+  TRES = 7
+ ENDIF
+ IF Y = 8 THEN
+ IF KILLDRAG1 = 0 THEN
+  MNST = 7
+ ENDIF
+ ENDIF
+ IF Y = 10 THEN
+  MNST = 2
+ ENDIF
+ENDIF
+IF X = 5 THEN
+ IF Y = 1 THEN
+  TRES = 5
+ ENDIF
+ IF Y = 2 THEN
+  IF KEY1 = 1 THEN
+   BD = 1
+  ENDIF
+ ENDIF
+ IF Y = 3 THEN
+  MNST = 3
+ ENDIF
+ IF Y = 4 THEN
+  MNST = 6
+ ENDIF
+ IF Y = 8 THEN
+  IF KEY2 = 1 THEN
+   LD = 1
+  ENDIF
+ ENDIF
+ IF Y = 9 THEN
+  MNST = 5
+ ENDIF
+ IF Y = 10 THEN
+  MNST = 3
+ ENDIF
+ENDIF
+IF TKN(TRES) = 1 THEN
+ TRES = 100
+ENDIF
+IF TRES = 0 THEN
+IF RM <> 3 THEN
+ CHST2 = RND(10)
+ CHST = CHST2 / 2047
+ IF TAKTRES = 0
+ IF CHST = 2 THEN
+  TRES = 9
+ ENDIF
+ IF CHST = 3 THEN
+  TRES = 10
+ ENDIF
+ IF CHST = 4 THEN
+  TRES = 11
+ ENDIF
+ IF CHST = 5 THEN
+  TRES = 12
+ ENDIF
+ENDIF
+ENDIF
+GOTO STOPCHK:
+
+ENDROOM:
+IF WINNER = 1 THEN
+CLS
+COLOR 14,0
+PRINT "[REDACTED: A terrible story written by a high-school sophmore.]"
+PRINT "Press any key to continue."
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+PRINT "[REDACTED: A terrible story written by a high-school sophmore.]"
+PRINT "Press any key to continue."
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+CALL ("FSPIC.COM"," THRONE.GLP")
+CLS
+COLOR 14,0
+PRINT "You're the hero now."
+PRINT "The king knights you for your deed."
+PRINT "YOU WIN!"
+PRINT ""
+PRINT ""
+COLOR 15,0
+PRINT "Thank you for playing ";
+COLOR 11,8
+PRINT "THE GREAT LABYRINTH";
+COLOR 15,0
+PRINT " by Dylan Wolf."
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+END
+ENDIF
+WINNER = 1
+CALL ("FSPIC.COM"," CRYSTAL.GLP")
+CLS
+IF SAVEMAN = 0 THEN
+CLS
+COLOR 14,0
+PRINT "[REDACTED: A terrible story written by a high-school sophmore.]"
+PRINT "Press any key to begin the second quest."
+X = 3
+Y = 1
+RM = 3
+YOUWIN = 1
+LBP$ = "H"
+HP = METER * 20
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+GOTO REDO:
+ENDIF
+IF SAVEMAN = 1 THEN
+CALL ("FSPIC.COM", " MAN.GLP")
+CLS
+COLOR 14,0
+PRINT "[REDACTED: A terrible story written by a high-school sophmore.]"
+PRINT "Press any key to begin the second quest."
+X = 3
+Y = 1
+RM = 3
+LBP$ = "H"
+HP = METER * 20
+YOUWIN = 1
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+GOTO REDO:
+ENDIF
+
+GAMEOVER:
+CLS
+COLOR 4,0
+PRINT ""
+PRINT ""
+PRINT "   €€€€     €€    €€€€   €€€€ €€€€                €€€€   €€  €€ €€€€ €€€€€€ "
+PRINT "  €€  €€   €€€€   €€€€€ €€€€€ €€                 €€  €€  €€  €€ €€   €€   €€"
+PRINT " €€       €€  €€  €€ €€€€€ €€ €€€€              €€    €€ €€  €€ €€€€ €€   €€"
+PRINT " €€  €€€ €€    €€ €€  €€€  €€ €€                €€    €€ €€  €€ €€   €€€€€€ "
+PRINT "  €€  €€ €€€€€€€€ €€   €   €€ €€                 €€  €€   €€€€  €€   €€ €€  "
+PRINT "   €€€€  €€    €€ €€       €€ €€€€                €€€€     €€   €€€€ €€  €€"
+COLOR 8,0
+LOCATE 0, 39
+PRINT "€€€€€"
+LOCATE 1,39
+PRINT "€€€€€"
+COLOR 0,6
+LOCATE 2, 40
+PRINT "Ÿ ⁄"
+LOCATE 3, 40
+PRINT " ⁄Ÿ"
+LOCATE 4, 40
+PRINT "⁄Ÿ "
+LOCATE 5, 40
+PRINT "Ÿ ⁄"
+LOCATE 6, 34
+COLOR 8,0
+PRINT "€€€€€€€€€€€€€€€"
+LOCATE 7, 34
+PRINT "€€           €€"
+COLOR 0,7
+LOCATE 7, 40
+PRINT "   "
+FOR ROW = 8 TO 19
+LOCATE ROW,40
+PRINT " ≥ "
+NEXT ROW
+LOCATE 20,40
+PRINT "‹≥‹"
+LOCATE 16,39
+COLOR 15,0
+PRINT "≥"
+LOCATE 17,38
+COLOR 15,0
+PRINT "ƒ≈";
+COLOR 15,7
+PRINT "ƒ"
+LOCATE 18,39
+COLOR 15,0
+PRINT "≥"
+LOCATE 23,0
+I$ = INKEY$
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+END
+
+MOVMAN:
+IF LBP$ = "H" THEN
+MOVY = 12
+FOR MOVY2 = 6 TO 11
+MOVY = MOVY - 1
+LOCATE MOVY, 11
+COLOR 14,1
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 2)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+GOSUB BRICKS:
+NEXT MOVY2
+ENDIF
+IF LBP$ = "P" THEN
+FOR MOVY = 1 TO 6
+LOCATE MOVY, 11
+COLOR 14,1
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 2)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+GOSUB BRICKS:
+NEXT MOVY
+ENDIF
+IF LBP$ = "K" THEN
+MOVX = 22
+FOR MOVX2 = 11 TO 21
+MOVX = MOVX - 1
+LOCATE 6, MOVX
+COLOR 14,1
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 1)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+GOSUB BRICKS:
+NEXT MOVX2
+ENDIF
+IF LBP$ = "M" THEN
+FOR MOVX = 1 TO 11
+LOCATE 6,MOVX
+COLOR 14,1
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 1)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+GOSUB BRICKS:
+NEXT MOVX
+ENDIF
+COLOR 14,1
+LOCATE 6,11
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 3)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+IF I$ = UP$ THEN
+MOVY = 7
+FOR MOVY2 = 1 TO 6
+MOVY = MOVY - 1
+LOCATE MOVY, 11
+COLOR 14,1
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 2)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+GOSUB BRICKS:
+NEXT MOVY2
+ENDIF
+IF I$ = DN$ THEN
+FOR MOVY = 6 TO 11
+LOCATE MOVY, 11
+COLOR 14,1
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 2)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+GOSUB BRICKS:
+NEXT MOVY
+ENDIF
+IF I$ = LT$ THEN
+MOVX = 12
+FOR MOVX2 = 1 TO 11
+MOVX = MOVX - 1
+LOCATE 6,MOVX
+COLOR 14,1
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 1)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+GOSUB BRICKS:
+NEXT MOVX2
+ENDIF
+IF I$ = RT$ THEN
+FOR MOVX = 11 TO 21
+LOCATE 6,MOVX
+COLOR 14,1
+PRINT ""
+START& = TIMER
+TICK& = 0
+WHILE (TICK& < 1)
+NOW& = TIMER
+NOWTIME& = NOW& - START&
+TICK& = ABS(NOWTIME&)
+WEND
+GOSUB BRICKS:
+NEXT MOVX
+ENDIF
+MOVX = 0
+MOVY = 0
+RETURN
+
+SAVEGUY:
+IF YOUWIN = 0 THEN
+CLS
+CALL ("FSPIC.COM"," MAN.GLP")
+CLS
+FOR COL = 0 TO 79
+COLOR 7,0
+FOR ROW = 0 TO 4
+LOCATE ROW, COL
+PRINT "€"
+NEXT ROW
+COLOR 0,1
+FOR ROW = 5 TO 6
+LOCATE ROW,COL
+PRINT " "
+NEXT ROW
+NEXT COL
+LOCATE 3,0
+COLOR 14,7
+PRINT " "
+LOCATE 4,0
+COLOR 4,7
+PRINT "<X\"
+LOCATE 5,0
+COLOR 9,1
+PRINT "/ >"
+LOCATE 2, 70
+COLOR 14,7
+PRINT " "
+LOCATE 3, 70
+COLOR 15,7
+PRINT "/X\"
+LOCATE 4, 70
+COLOR 9,7
+PRINT "/ \"
+LOCATE 8,0
+COLOR 14, 0
+SAVEMAN = 1
+PRINT "YOU: You were trapped in here?"
+PRINT "MAN: Yes!"
+PRINT "YOU: Come with me.  I think I'm about to escape!"
+PRINT "MAN: No.  I am too weak after that Dragon attack.  Leave me."
+PRINT "YOU: If that is what you want..."
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+WEND
+TAKTRES = 1
+KILLDRAG1 = 1
+ENDIF
+GOTO REDO:
+
+BRICKFLOOR:
+COLOR 0,1
+L = 1
+FOR R = 1 TO 11
+L = L * -1
+FOR C = 1 TO 20
+IF L = 1 THEN
+LOCATE R,C
+PRINT "¡¬"
+ENDIF
+IF L = -1 THEN
+LOCATE R,C
+PRINT "¬¡"
+ENDIF
+C = C + 1
+NEXT C
+NEXT R
+FOR R = 1 TO 11
+LOCATE R, 21
+PRINT "¬"
+R = R + 1
+IF R < 12 THEN
+LOCATE R, 21
+PRINT "¡"
+ENDIF
+NEXT R
+RETURN
+
+BRICKS:
+COLOR 0,1
+IF MOVX > 0 THEN
+LOCATE 6,1
+PRINT "¡¬¡¬¡¬¡¬¡¬¡¬¡¬¡¬¡¬¡¬¡"
+ENDIF
+IF MOVY > 0 THEN
+FOR R = 1 TO 11
+LOCATE R, 11
+PRINT "¬"
+R = R + 1
+IF R < 12 THEN
+LOCATE R, 11
+PRINT "¡"
+ENDIF
+NEXT R
+ENDIF
+RETURN
+
+

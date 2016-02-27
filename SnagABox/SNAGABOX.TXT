@@ -1,0 +1,83 @@
+SNAG  A  BOX   INFO FILE - - - - - - - - - - SNAGABOX.TXT
+
+A   G A M E   B Y   D Y L A N   W O L F . . .
+         ÛÛÛÛÛÛÛ Û   Û ÜßÜ ÜßßÜ       ÜßÜ        ÛÛÛÛÛ  ÜßÜ Û Û
+        ÛÛ     ß ÛßÜ Û Û Û Û      Ü   Û Û   Ü    ÛÛ  ÛÛ Û Û ßÜß
+         ÛÛÛÛÛ   Û ßÜÛ ÛÛÛ Û ßÛ  ßÛß  ÛÛÛ  ßÛß  ÛÛ  ÛÛ  Û Û Û Û
+            ÜÛÛ  Û   Û Û Û ßÜÜß       Û Û       ÛÛÛÛ    ßÜß Û Û
+    ÜÛÛÛÛÛÛÛÛÜÜ                                ÛÛ  ÛÛ
+    ÛÛ  ÜÛÛß ßÛÛ                              ÛÛ    ÛÛ
+    ßÛÛÛÛÛß   ßß                              ÛÛŞÛ ÛÛ
+                                                 ÛÛÛ
+     ±±±±±±±±       ²²²²²²²²²²²²   ÉÍ»    ÉÍÍÍÍÍÍÍ»         ÜÜÜÜ
+    ±±±±±±±±±±     ²°°°²²°°°°²°°²  ÈÍ¹   É¹       È»      ÜÛ°ÛÛÛÛÜ
+    ±²²±²²²ß²     ²°°°²²°°°°²°°²² ÉÍ»È»  ºÈ»       È»   ÜÛ°°ÛÛÛÛÛÛÛÜ
+    ±±²²²²²²²²    ²²²²±±²²²²²²²°² º ÈÍ¼ É¼ ÈÍÍÍÍÍÍÍÍ¼   ÛÛÛÛÛÛÛÛÛÛÛÛ
+     ²²²²²²²²     ²°°°°°°°°°²°°°² º     º               ÛÛÛÛÛÛÛÛÛÛÛÛ
+      ²²²²²²ß     ²°°°°°°°°°²°°²² ÈÍÍÍÍÍ¼                ßÛÛÛÛÛÛÛÛß
+       ²²²²²²     ²²²²²²²²²²²²²                            ßÛÛÛÛß
+úùùú úùùú úùùú úùùú úùùú úùùú úùùú úùùú úùùú úùùú úùùú úùùú úùùú
+
+ . Object of SNAG-A-BOX
+ 
+     Get as many boxes as you can by using your rope and avoiding the
+    enemies.  You have 5 lives and you lose one when an enemy hits you.
+    When hit, you reappear at the top of the screen.
+    
+          HOW TO SCORE POINTS & 1UPS
+           ù Get a box with the rope ********************** 10 points 
+           ù Get an enemy with the rope ******************* 1 point
+           ù Score 500, 1000, 1500, etc. points *********** 1up
+
+                
+ . SNAG-A-BOX SCREEN
+     The arrows on this diagram show where the character can walk from 
+    one side of the screen to the other.  If you fall into one of the two
+    pits on the bottom, you will come to the top.  If you walk to the left,
+    you will end up on the right, and vice versa.
+             ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+             ³  ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß  ³ 
+             ³                                           ³ 
+             ³                   START              o    ³ 
+             ³ßßßßßßßßßßßßß         ß         ßßßßßßßßßßßßß³
+             ³                                           ³
+             ³                               o           ³
+             ³ßßßßßßßßßßßßßß        ß        ßßßßßßßßßßßßßß³
+             ³        BOX                                ³
+             ³          ş                                ³
+             ³ßßßßßßßßßßßßßßß       ß       ßßßßßßßßßßßßßßß³
+             ³                        ENEMY              ³
+             ³                       o                   ³
+             ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ³
+             ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+
+ . Hints, Tips, and Rules
+
+         You can get an enemy with the rope.  The enemy will disappear 
+          and reappear at the bottom of the screen.  To hit the enemy, 
+          you must touch it with the end of the rope when you are throwing 
+          it.
+         You can't throw your rope if t will go past the edge of the
+          screen.  If you are too close to the edge, back up.
+         You can't throw your rope while jumping or falling.
+         You move slower when falling or jumping.
+
+ . Controls
+        ÚÄÄÄÄ¿
+        ³ /\ ³  ARROW KEYS MOVE YOUR CHARACTER.  RIGHT AND LEFT MAKE HIM
+   ÚÄÄÄÄÅÄÄÄÄÅÄÄÄÄ¿ WALK, UP MAKES HIM JUMP.
+   ³ <  ³    ³  > ³
+   ÀÄÄÄÄÁÄÄÄÄÁÄÄÄÄÙ
+   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿SPACE BAR MAKES YOUR CHARACTER THROW THE
+   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙROPE.  USE THIS TO GET BOXES. 
+
+   SPECIAL     ÚÄÄÄÂÄÄÄ¿ESC - WHILE PLAYING, PRESS ESCAPE TO QUIT
+          KEYS ³ESC³ P ³P - - WHILE PLAYING, PRESS P TO PAUSE
+               ÀÄÄÄÁÄÄÄÙ
+
+ . High Score List
+
+       The five best players will be listed here.  If you lose all of your 
+ lives or exit to the TITLE SCREEN you will have a chance to get your name 
+ here, but if you exit to DOS, you will not get a chance.

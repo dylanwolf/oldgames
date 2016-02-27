@@ -1,0 +1,84 @@
+BRSH = 1
+CLS
+SCREEN 13
+AX=0
+GOSUB MOUSE:
+AX=1
+GOSUB MOUSE:
+WHILE (I$<>"")
+   AX=3
+   GOSUB MOUSE:
+   I$=INKEY$
+   IF BX = 1 THEN
+   CF = CX / 2
+   FOR R = 0 TO BRSH
+   DF = DX - R
+   DF = DF - 1
+   FOR C = 0 TO BRSH
+   CZ = CF-C
+   PSET (DF,CZ),CLR
+   U = DX * 640
+   U = U + CX
+   NEXT C
+   NEXT R
+   ENDIF
+   IF I$ = "X" THEN
+   AX=2
+   GOSUB MOUSE:
+   SCREEN 0
+   CLS
+   SCREEN 13
+   AX=1
+   GOSUB MOUSE:
+   ENDIF
+   IF I$ = "C" THEN
+   LOCATE 23,0
+   INPUT CLR
+   ENDIF
+   IF I$ = "B" THEN
+   LOCATE 23,0
+   INPUT BRSH
+   ENDIF
+   IF I$ = "O" THEN
+   LOCATE 23,0
+   INPUT A$
+   OPEN "I",1,A$
+   WHILE (ERROR < 1)
+   INPUT# 1, R
+   INPUT# 1, C
+   INPUT# 1, CLR
+   PSET (R,C),CLR
+   WEND
+   CLOSE 1
+   ENDIF
+   IF I$ = "S" THEN
+   LOCATE 23,0
+   INPUT FILE$
+   OPEN "O",1, FILE$
+   LOCATE 23,0
+   PRINT "            "
+   FOR ROW = 0 TO 190
+   FOR COL = 0 TO 320
+   CLRPNT = POINT (ROW,COL)
+   IF CLRPNT <> 0 THEN
+    PRINT# 1, ROW
+    PRINT# 1, COL
+    PRINT# 1, CLRPNT
+   ENDIF
+   NEXT COL
+   NEXT ROW
+   LOCATE 0,0
+   COLOR 44,0
+   PRINT "DONE..."
+   CLOSE 1
+   ENDIF
+WEND
+AX=2
+GOSUB MOUSE:
+SCREEN 0
+CLS
+END
+
+   MOUSE:
+   INT86(&HEX33,AX,BX,CX,DX,NA,NA,NA,NA,NA)
+   RETURN

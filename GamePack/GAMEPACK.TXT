@@ -1,0 +1,95 @@
+Wolfware Game Pack
+WOLFWARE
+    ÛÛÛÛÛ      ÛÛ    ÛÛÛ     ÛÛÛ  ÛÛÛÛÛÛ    ÛÛÛÛÛÛ     ÛÛ      ÛÛÛÛÛ  ÛÛ  ÛÛ
+   ÛÛ   ÛÛ    ÛÛÛÛ   ÛÛÛÛ   ÛÛÛÛ  ÛÛ        ÛÛ   ÛÛ   ÛÛÛÛ    ÛÛ   ÛÛ ÛÛ ÛÛ
+  ÛÛ         ÛÛ  ÛÛ  ÛÛÛÛÛ ÛÛÛÛÛ  ÛÛÛÛ      ÛÛ   ÛÛ  ÛÛ  ÛÛ  ÛÛ       ÛÛÛÛ
+  ÛÛ   ÛÛÛ  ÛÛ    ÛÛ ÛÛ ÛÛÛÛÛ ÛÛ  ÛÛ        ÛÛÛÛÛÛ  ÛÛ    ÛÛ ÛÛ       ÛÛ ÛÛ
+   ÛÛ   ÛÛ  ÛÛÛÛÛÛÛÛ ÛÛ  ÛÛÛ  ÛÛ  ÛÛ        ÛÛ      ÛÛÛÛÛÛÛÛ  ÛÛ   ÛÛ ÛÛ  ÛÛ
+    ÛÛÛÛÛ   ÛÛ    ÛÛ ÛÛ   Û   ÛÛ  ÛÛÛÛÛÛ    ÛÛ      ÛÛ    ÛÛ   ÛÛÛÛÛ  ÛÛ  ÛÛ
+by Dylan Wolf
+
+A. Hovercraft A-225X
+   OBJECT: Do not let the Attack Probes () get to the edge of the screen!
+
+  I. Status Bar
+
+          At the top of your game screen, you'll see a line of information:
+
+   SCORE     0           10            Desert Oasis       
+  ÀÄÄÄÄÄÂÄÄÄÄÄÙ        ÀÄÄÂÄÙ          ÀÄÄÄÄÄÄÂÄÄÄÄÄÙ      
+   SCORE/POINTS         HOW MANY        STAGE TITLE        
+                        'S CAN                          
+                        PASS YOU                               
+
+   II. Controls
+      ÚÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄ¿N      ÚÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄ¿A      OTHER KEYS:
+      ³  7  ³  8  ³  9  ³U      ³Home ³    ³PageU³R      ESC   EXIT
+      ³    \³    ³  /  ³M      ³  \  ³     ³  /  ³R      Z     PAUSE
+      ÃÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄ´E      ÃÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄ´O      
+      ³  4  ³  5  ³  6  ³R K    ³    ³SPACE³    ³W      
+      ³    ³FIRE ³    ³I E    ³     ³FIRE ³     ³       
+      ÃÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄ´C Y    ÃÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄ´K      
+      ³  1  ³  2  ³  3  ³  P    ³End  ³    ³PageD³E  
+      ³  /  ³    ³  \  ³  A    ³  /  ³     ³  \  ³Y  
+      ÀÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÙ  D    ÀÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÙS        
+        >>NUM LOCK ON<<               
+
+   III. Stages
+   * There are 4 stages.  You must earn a certain number of points to
+     advance.
+
+       To advance to stage 2, you must have     250 points
+       To advance to stage 3, you must have     750 points
+       To advance to stage 4, you must have     1500 points
+       To finish the game, you must have        2750 points
+
+  * The number of 's ("lives") on the screen does not stay the same between
+    stages.  Each stage has a different limit.  They are:
+
+        's at beginning of stage 1:    10
+        's at beginning of stage 2:    8
+        's at beginning of stage 3:    5
+        's at beginning of stage 4:    2
+
+B. Wolfware Slots
+
+                ÚÄÄÄÄÄÄÄ¿   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  KEY  ³   ³                  ACTION                  ³
+                ÃÄÄÄÄÄÄÄ´   ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                ³SPACE  ³   ³Roll Again                                ³
+                ÃÄÄÄÄÄÄÄ´   ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                ³ESC    ³   ³Exit Program                              ³
+                ÃÄÄÄÄÄÄÄ´   ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                ³F1     ³   ³Toggle Congratulations                    ³
+                ÀÄÄÄÄÄÄÄÙ   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+  * "CONGRATULATIONS" are the JACKPOT and CLOSE messages that run when
+    you get 2 or 3 characters matched on a roll. 
+
+C. Bounce Paddles
+
+ * THIS IS A TWO-PLAYER GAME ONLY!
+  I. Object of the game
+         Get the ball past your opponent.  Each time this is done, a point is
+      scored.  When the point total equals the Points To Get number (you may
+      change this before the game), a WINNER screen comes up announcing the 
+      winner.  (These screens are slow... be patient.)
+         After the WINNER screen, the game will end.
+
+   II. Controls
+         Keyboard-----
+          UP/DOWN ARROW KEYS () - Move first player (green)
+          PAGE UP/PAGE DOWN KEYS  - Move second player (blue)
+
+         Mouse--------
+          Move up and down to move paddle
+
+           KEYBOARD controls will not work for the player using the MOUSE 
+       
+
+D. About the Author
+
+      My name is Dylan Wolf and I am 14 years old.  Right now (1996), I am
+ beginning the 10th grade.  I learned to program by reading and running
+ programs in a magazine and observing what certain commands did.  I also
+ used on-line help in a BASIC program to teach myself the language, which
+ I used for these programs.  

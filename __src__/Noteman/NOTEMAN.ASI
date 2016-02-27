@@ -1,0 +1,522 @@
+DIM PIC(399)
+DATA 81,82,83,90,91,92,93,94,98,101,105,106,108,109,111
+DATA 113,127,128,129,130,134,137,142,145,148,149,151,153,156,157
+DATA 158,167,170,174,175,177,182,184,185,188,189,191,193,196,203
+DATA 205,210,211,212,215,218,221,224,228,231,233,241,242,243,245
+DATA 246,252,253,255,258,261,264,268,270,271,273,276,285,295,296
+DATA 59,60,71,297,298,301,302,303,304,308,310,311,313,316,317
+DATA 318,325,248,353,123,348
+CALL ("FSPIC.COM"," NOTEMAN.TLE")
+SC = 0
+L = 2
+RESTRT2:
+INVC = 0
+L = L + 1
+VIT = 0
+FOR P = 0 TO 399
+PIC(P) = 250
+NEXT P
+PIC(257) = 15
+PIC(262) = 15
+PIC(161) = 15
+PIC(238) = 15
+RESTRT:
+YC$ = CHR$(13)
+RANDOMIZE
+PMP = 339
+EP1 = 139
+EP2 = 140
+X = 19
+Y = 8
+EX1 = 19
+EX2 = 20
+EY1 = 3
+EY2 = 3
+FOR P = 1 TO 96
+READ G
+PIC(G) = 219
+NEXT P
+RESTORE
+FOR P = 0 TO 39
+PIC(P) = 219
+P2 = 360 + P
+PIC(P2) = 219
+NEXT P
+FOR P3 = 0 TO 9
+P = P3 * 40
+PIC(P) = 219
+P2 = P + 39
+PIC(P2) = 219
+NEXT P3
+PIC(138) = 175
+PIC(141) = 174
+WIDTH 40
+LOCATE 0,0
+FOR P = 0 TO 399
+P$ = CHR$(PIC(P))
+COLOR 8,1
+IF P$ = "˙" THEN
+COLOR 7,1
+ENDIF
+IF P$ = "" THEN
+COLOR 15,1
+ENDIF
+IF P$ = "Æ" THEN
+COLOR 12,1
+ENDIF
+IF P$ = "Ø" THEN
+COLOR 12,1
+ENDIF
+PRINT P$;
+NEXT P
+COLOR 15,1
+LOCATE Y,X
+PRINT YC$
+COLOR 4,1
+LOCATE EY2,EX2
+PRINT ""
+LOCATE EY1,EX1
+PRINT ""
+LOCATE 10,0
+NOMOVE = 0
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+LOCATE 23,0
+COLOR 14,0
+PRINT "        ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+LOCATE 23,0
+COLOR 9,0
+PRINT "        ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+LOCATE 23,0
+COLOR 11,0
+PRINT "        ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+LOCATE 23,0
+COLOR 1,0
+PRINT "        ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+LOCATE 23,0
+COLOR 3,0
+PRINT "        ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+WEND
+I$ = ""
+WHILE (I$ <> "")
+ LOCATE 23,0
+ COLOR 15,0
+ PRINT "˙S˙C˙O˙R˙E˙";
+ PRINT SC;
+ PRINT "   ˙L˙I˙F˙E˙";
+ PRINT L
+IF INVC <= 0 THEN
+COLOR 15,1
+ELSE
+JKL = RND(20)
+COLOR JKL,1
+ENDIF
+LOCATE Y,X
+PRINT YC$
+COLOR 4,1
+LOCATE EY1,EX1
+PRINT ""
+LOCATE EY2,EX2
+PRINT ""
+LOCATE 23,39
+TME& = 0
+STRT& = TIMER
+INVC = INVC - 1
+WHILE (TME& < 1)
+TME2& = TIMER
+TME& = STRT& - TME2&
+TME& = ABS(TME&)
+WEND
+NOMOVE = NOMOVE + 1
+IF NOMOVE = 3 THEN
+GOSUB ENHANDLER:
+NOMOVE = 0
+ENDIF
+XYZ$ = CHR$(0)
+UP$ = XYZ$ + "H"
+DN$ = XYZ$ + "P"
+LT$ = XYZ$ + "K"
+RT$ = XYZ$ + "M"
+I$ = INKEY$
+IF I$ = UP$ THEN
+ GOSUB DRAWDOT:
+ PMP = PMP - 40
+  IF PIC(PMP) <> 219 THEN
+   PMP = PMP - 40
+   Y = Y - 1
+  ENDIF
+ PMP = PMP + 40
+ENDIF
+IF I$ = DN$ THEN
+ GOSUB DRAWDOT:
+ PMP = PMP + 40
+  IF PIC(PMP) <> 219 THEN
+   PMP = PMP + 40
+   Y = Y + 1
+  ENDIF
+ PMP = PMP - 40
+ENDIF
+IF I$ = LT$ THEN
+ GOSUB DRAWDOT:
+ PMP = PMP - 1
+  IF PIC(PMP) <> 219 THEN
+   PMP = PMP - 1
+   X = X - 1
+  ENDIF
+ PMP = PMP + 1
+ENDIF
+IF I$ = RT$ THEN
+ GOSUB DRAWDOT:
+ PMP = PMP + 1
+  IF PIC(PMP) <> 219 THEN
+   PMP = PMP + 1
+   X = X + 1
+  ENDIF
+ PMP = PMP - 1
+ENDIF
+IF PIC(PMP) = 250 THEN
+ SC = SC + 1
+ PIC(PMP) = 032
+ SOUND 5000,10
+ VIT = VIT + 1
+ IF VIT = 202 THEN RESTRT2:
+ENDIF
+IF PIC(PMP) = 15 THEN
+ IF INVC < 0 THEN
+ INVC = 0
+ ENDIF
+ SC = SC + 50
+ INVC = INVC + 200
+ SOUND 10000,10
+ PIC(PMP) = 032
+ENDIF
+IF EX1 = X THEN
+IF EY1 = Y THEN
+IF INVC <= 0 THEN
+L = L - 1
+GOTO RESTRT:
+ENDIF
+IF INVC > 0 THEN
+EX1 = 19
+EY1 = 2
+EP1 = 99
+SC = SC + 100
+ENDIF
+ENDIF
+ENDIF
+IF EX2 = X THEN
+IF EY2 = Y THEN
+IF INVC <= 0 THEN
+L = L - 1
+GOTO RESTRT:
+ENDIF
+IF INVC > 0 THEN
+EX2 = 20
+EY2 = 2
+EP2 = 100
+SC = SC + 100
+ENDIF
+ENDIF
+ENDIF
+IF L < 1 THEN GAMEOVER:
+WEND
+WIDTH 80
+END
+
+DRAWDOT:
+P$ = CHR$(PIC(PMP))
+COLOR 8,1
+IF P$ = "˙" THEN
+COLOR 7,1
+ENDIF
+IF P$ = "" THEN
+COLOR 15,1
+ENDIF
+IF P$ = "Æ" THEN
+COLOR 12,1
+ENDIF
+IF P$ = "Ø" THEN
+COLOR 12,1
+ENDIF
+LOCATE Y,X
+PRINT P$
+RETURN
+
+ENHANDLER:
+P$ = CHR$(PIC(EP1))
+COLOR 8,1
+IF P$ = "˙" THEN
+COLOR 7,1
+ENDIF
+IF P$ = "" THEN
+COLOR 15,1
+ENDIF
+IF P$ = "Æ" THEN
+COLOR 12,1
+ENDIF
+IF P$ = "Ø" THEN
+COLOR 12,1
+ENDIF
+LOCATE EY1,EX1
+PRINT P$
+
+P$ = CHR$(PIC(EP2))
+COLOR 8,1
+IF P$ = "˙" THEN
+COLOR 7,1
+ENDIF
+IF P$ = "" THEN
+COLOR 15,1
+ENDIF
+IF P$ = "Æ" THEN
+COLOR 12,1
+ENDIF
+IF P$ = "Ø" THEN
+COLOR 12,1
+ENDIF
+LOCATE EY2,EX2
+PRINT P$
+
+MOVE1:
+K11 = RND(3)
+K1 = K11 / 5553
+IF EX1 >= 19 THEN
+IF EX1 <= 20 THEN
+IF EY1 >= 3 THEN
+IF EY1 <= 7 THEN
+K1 = 2
+ENDIF
+ENDIF
+ENDIF
+ENDIF
+IF EY1 = 8 THEN
+IF EX1 >= 15 THEN
+IF EX1 <= 24 THEN
+K1 = 1
+ENDIF
+ENDIF
+ENDIF
+
+IF K1 = 2 THEN
+EP1 = EP1 + 40
+IF PIC(EP1) <> 219 THEN
+EY1 = EY1 + 1
+GOTO MOVE2:
+ELSE
+EP1 = EP1 - 40
+GOTO MOVE1:
+ENDIF
+ENDIF
+
+IF K1 = 4 THEN
+EP1 = EP1 - 40
+IF PIC(EP1) <> 219 THEN
+EY1 = EY1 - 1
+GOTO MOVE2:
+ELSE
+EP1 = EP1 + 40
+GOTO MOVE1:
+ENDIF
+ENDIF
+
+IF K1 = 1 THEN
+EP1 = EP1 - 1
+IF PIC(EP1) <> 219 THEN
+EX1 = EX1 - 1
+GOTO MOVE2:
+ELSE
+EP1 = EP1 + 1
+GOTO MOVE1:
+ENDIF
+ENDIF
+
+IF K1 = 3 THEN
+EP1 = EP1 + 1
+IF PIC(EP1) <> 219 THEN
+EX1 = EX1 + 1
+GOTO MOVE2:
+ELSE
+EP1 = EP1 - 1
+GOTO MOVE1:
+ENDIF
+ENDIF
+
+MOVE2:
+K22 = RND(7)
+K2 = K22 / 5553
+IF EX2 >= 19 THEN
+IF EX2 <= 20 THEN
+IF EY2 >= 3 THEN
+IF EY2 <= 7 THEN
+K2 = 2
+ENDIF
+ENDIF
+ENDIF
+ENDIF
+
+IF EY2 = 8 THEN
+IF EX2 >= 15 THEN
+IF EX2 <= 24 THEN
+K2 = 1
+ENDIF
+ENDIF
+ENDIF
+
+IF K2 = 2 THEN
+EP2 = EP2 + 40
+IF PIC(EP2) <> 219 THEN
+EY2 = EY2 + 1
+RETURN
+ELSE
+EP2 = EP2 - 40
+GOTO MOVE2:
+ENDIF
+ENDIF
+
+IF K2 = 3 THEN
+EP2 = EP2 - 40
+IF PIC(EP2) <> 219 THEN
+EY2 = EY2 - 1
+RETURN
+ELSE
+EP2 = EP2 + 40
+GOTO MOVE2:
+ENDIF
+ENDIF
+
+IF K2 = 4 THEN
+EP2 = EP2 - 1
+IF PIC(EP2) <> 219 THEN
+EX2 = EX2 - 1
+RETURN
+ELSE
+EP2 = EP2 + 1
+GOTO MOVE2:
+ENDIF
+ENDIF
+
+IF K2 = 1 THEN
+EP2 = EP2 + 1
+IF PIC(EP2) <> 219 THEN
+EX2 = EX2 + 1
+RETURN
+ELSE
+EP2 = EP2 - 1
+GOTO MOVE2:
+ENDIF
+ENDIF
+RETURN
+
+
+GAMEOVER:
+WIDTH 80
+CLS
+COLOR 4,0
+PRINT "        €€€€    €€    €€€    €€€ €€€€         €€€   €€    €€ €€€€ €€€€   €€"
+PRINT "       €€      €€€€   €€€€  €€€€ €€          €€ €€  €€    €€ €€   €€ €€  €€"
+PRINT "      €€  €€  €€  €€  €€€€€€€€€€ €€€€       €€   €€  €€  €€  €€€€ €€€€   €€"
+PRINT "       €€  € €€€€€€€€ €€ €€€€ €€ €€          €€ €€    €€€€   €€   €€ €€  ﬂﬂ"
+PRINT "        €€€€ €€    €€ €€  €€  €€ €€€€         €€€      €€    €€€€ €€  €€ €€"
+COLOR 15,0
+PRINT "                                    €€€€€€€›           "
+PRINT "                                          €€›          "
+PRINT "                                     €€€€€€€€›         "
+PRINT "                                            €€›        "
+PRINT "                                             €€›       "
+PRINT "                                              €€€€€€€‹ "
+PRINT "                                               €€€€€ﬂ€ "
+PRINT "                                               €€€€€€€ﬂ"
+PRINT "                                               ﬂ€€€€‹‹"
+I$ = ""
+WHILE (I$ = "")
+I$ = INKEY$
+LOCATE 23,0
+COLOR 14,0
+PRINT "                           ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+LOCATE 23,0
+COLOR 9,0
+PRINT "                           ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+LOCATE 23,0
+COLOR 11,0
+PRINT "                           ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+LOCATE 23,0
+COLOR 1,0
+PRINT "                           ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+LOCATE 23,0
+COLOR 3,0
+PRINT "                           ˙H˙I˙T˙ ˙A˙N˙Y˙ ˙K˙E˙Y˙        "
+T& = 0
+STRT& = TIMER
+WHILE (T& < 1)
+NOW& = TIMER
+R& = NOW& - STRT&
+T& = ABS(R&)
+WEND
+WEND
+CLS
+END
+
